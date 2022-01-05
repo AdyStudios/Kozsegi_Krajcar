@@ -1,0 +1,19 @@
+{
+  "name": "kozsegi_krajcar",
+  "version": "1.0.0",
+  "description": "Községi Krajcár Rendszer (open source)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdyStudios/Kozsegi_Krajcar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdyStudios/Kozsegi_Krajcar/issues"
+  },
+  "homepage": "https://github.com/AdyStudios/Kozsegi_Krajcar#readme"
+}
