@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AdyStudios/Kozsegi_Krajcar/issues"
   },
-  "homepage": "https://github.com/AdyStudios/Kozsegi_Krajcar#readme"
+  "homepage": "https://github.com/AdyStudios/Kozsegi_Krajcar#readme",
+  "dependencies": {
+    "discord.js": "^13.5.0"
+  }
 }
