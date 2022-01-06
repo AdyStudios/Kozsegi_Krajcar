@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AdyStudios/Kozsegi_Krajcar#readme",
   "dependencies": {
-    "discord.js": "^13.5.0"
+    "discord.js": "^13.5.0",
+    "self-reload-json": "^0.4.0"
   }
 }

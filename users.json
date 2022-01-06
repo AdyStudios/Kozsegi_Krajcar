@@ -1,10 +1,18 @@
 [
   {
     "username": "test_elek1",
-    "cr": 22
+    "cr": 20
   },
   {
     "username": "test_elek2",
     "cr": 20
+  },
+  {
+    "username": "test",
+    "cr": 0
+  },
+  {
+    "username": "test_elek3",
+    "cr": 530
   }
 ]
