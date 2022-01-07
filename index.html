@@ -3,20 +3,27 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Községi Krajcár Global</title>
+        <link rel="icon" type="image/x-icon" href="images\favicon.ico">
     </head>
     <body>
         <div class="cont">
-            <h1>%%%Name%%% Községi Krajcár egyenlege: <br>%%%Value%%%</h1>
+            <h1 id="lab">%%%Name%%% Községi Krajcár egyenlege: <br>%%%Value%%%</h1>
         </div>
     </body>
     <style>
         body {
-            background-color: #c04744;
+            background-color: #ff0400;
         }
         h1 {
             color: #fff;
             text-align: center;
             font-family: "Century Gothic", Courier, monospace;
+            opacity: 0;
+            transition: opacity 1.2s;
+            -webkit-transition: opacity 1.2s;
+        }
+        h1::after {
+            opacity: 1;
         }
         .cont {
             display: flex;
@@ -29,11 +36,31 @@
         }
     </style>
     <script type="text/javascript">
+        const sleep = (milliseconds) => {
+            return new Promise(resolve => setTimeout(resolve, milliseconds))
+        }
+        async function some_shit() {
+            //get inner html
+            var lab = document.getElementById('lab');
+            var inn = lab.innerHTML;
+            var spl = inn.split("<br>");
+            var frst = spl[0] + "<br>";
+            var val = spl[1]; //parseInt("10");
+            for (var i = 0; i < 60; i++) {
+                document.getElementById('lab').innerHTML = frst + Math.round(val / 60 * i);
+                console.log(Math.round(val / 22 * i));
+                await sleep(15);
+            }
+            document.getElementById('lab').innerHTML = inn;
+        }
+        some_shit();
+
         const socket = new WebSocket('ws://localhost:8090');
         socket.addEventListener('close',()=>{
             if (!document.URL.includes("/view")) {
                 location.reload();
             }
         });
+        
     </script>
 </html>
