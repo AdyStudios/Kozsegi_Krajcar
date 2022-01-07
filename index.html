@@ -13,17 +13,18 @@
     <style>
         body {
             background-color: #ff0400;
+            
         }
         h1 {
             color: #fff;
             text-align: center;
+            font-size: 8rem;
             font-family: "Century Gothic", Courier, monospace;
-            opacity: 0;
-            transition: opacity 1.2s;
-            -webkit-transition: opacity 1.2s;
-        }
-        h1::after {
-            opacity: 1;
+	        opacity: 1;
+	        animation-name: fadeInOpacity;
+	        animation-iteration-count: 1;
+	        animation-timing-function: ease-in;
+	        animation-duration: 0.7s;
         }
         .cont {
             display: flex;
@@ -34,8 +35,18 @@
             border-radius: 8px;
             outline: solid 5px #fff;
         }
+
+        @keyframes fadeInOpacity {
+        	0% {
+        		opacity: 0;
+        	}
+        	100% {
+        		opacity: 1;
+        	}
+        }
     </style>
     <script type="text/javascript">
+        //TODO: change background color by cr ammount
         const sleep = (milliseconds) => {
             return new Promise(resolve => setTimeout(resolve, milliseconds))
         }

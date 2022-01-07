@@ -48,6 +48,8 @@ var server = http.createServer(function(req, res) {
             res.writeHead(200, {'Content-Type': 'text/html'});
             fs.createReadStream(__dirname + '/chooser.html').pipe(res);
             return;
+        } else if (req.url === ('/favicon.ico')) {
+            fs.createReadStream(__dirname + '/images/favicon.ico').pipe(res);
         }
 
         //send error if unsuccessful
