@@ -9,6 +9,23 @@ const WEBSOCKET_PORT = 8090;
 const wss = new WebSocket.Server({
     port: WEBSOCKET_PORT
 });
+
+function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
+
+async function animateCr(_cr, duration, _html, _res) {
+    for(let i = 0; i < _cr + 1; i++) {
+        console.log(i);
+        _html = _html.replace("%%%Value%%%", i);
+        await sleep(duration/_cr);
+        _res.end(_html);
+    }
+    _res.end(_html);
+}
+
 var server = http.createServer(function(req, res) {
     const method = req.method.toLowerCase();
     if (method === 'get') {
@@ -32,12 +49,13 @@ var server = http.createServer(function(req, res) {
             }
 
             //send response if successful
-            if (success) {
+            if (success) 
+            {
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
                 html = html.replace('%%%Name%%%', user);
-                const obj = document.getElementById("%%%Value%%%");
                 //TODO: animate cr value
+                animateCr(cr, 500, html, res);
                 html = html.replace('%%%Value%%%', cr);
                 res.end(html);
                 return;
