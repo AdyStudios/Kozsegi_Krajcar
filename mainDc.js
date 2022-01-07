@@ -6,7 +6,19 @@ const indexFile = require('./index.js');
 var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.2QnWT_MPS0ri09GpkuQg_RP3J_Y";
 var prefix = "!";
 
+const { MessageEmbed } = require('discord.js');
+const helpenbed = new MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle('Help')
+    .setDescription('This is a help command')
+    .addField('!help', 'Displays this message. Usage: !help')
+    .addField('!addcr', 'Adds cr to a user. Usage: !addcr <user> <cr>')
+    .addField('!rmcr', 'Removes cr from a user. Usage: !rmcr <user> <cr>')
+    .addField('!getcr', 'Displays the cr of a user. Usage: !getcr <user>')
+    .addField('!crlist', 'Displays the cr of all users. Usage: !crlist')
+    .addField('!crset', 'Sets the cr of a user. Usage: !crset <user> <cr>');
 
+const userNotExists
 indexFile.addUser('test', 0);
 
 console.log(`Logged in as !`);
@@ -130,12 +142,22 @@ client.on('message', message => {
             result_ = indexFile.checkUser(user);
 
             if(!result_) {
-                message.channel.send('User does not exist');
+                message.channel.send('User does not exist!');
             }
             if(result_) {
                 message.channel.send('User exists');
             }
         }
+    }
+    //check if the message is !crlist and if true get cr to a user with the index.js's function with arugments of the message
+    if(command === 'crlist') 
+    {
+        message.channel.send(indexFile.getCrAll());
+    }
+    //create help command
+    if(command === 'help') 
+    {
+        message.channel.send({ embeds: [helpenbed] });
     }
 
 });

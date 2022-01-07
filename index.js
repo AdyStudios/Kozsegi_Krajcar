@@ -124,5 +124,10 @@ function getCr(user) {
     }
     return false;
 }
+function getCrAll() {
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+    return users;
+}
 
-module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr };
+module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getCrAll };
