@@ -6,6 +6,35 @@ const indexFile = require('./index.js');
 var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.2QnWT_MPS0ri09GpkuQg_RP3J_Y";
 var prefix = "!";
 
+const { MessageEmbed } = require('discord.js');
+const helpenbed = new MessageEmbed()
+    .setColor('#0099ff')
+    .setTitle('Help')
+    .setDescription('This is a help command')
+    .addField('!help', 'Displays this message. Usage: !help')
+    .addField('!addcr', 'Adds cr to a user. Usage: !addcr <user> <cr>')
+    .addField('!rmcr', 'Removes cr from a user. Usage: !rmcr <user> <cr>')
+    .addField('!getcr', 'Displays the cr of a user. Usage: !getcr <user>')
+    .addField('!crlist', 'Displays the cr of all users. Usage: !crlist')
+    .addField('!crset', 'Sets the cr of a user. Usage: !crset <user> <cr>');
+
+const userNotExists = new MessageEmbed()
+    .setColor('#ff0000')
+    .setTitle('Error')
+    .setDescription('User does not exist!');
+
+const userExistsembed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('User exists.');
+const userAddedEmbed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('User added.');
+const userRemovedEmbed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('User removed.');
 
 indexFile.addUser('test', 0);
 
@@ -46,7 +75,7 @@ client.on('message', message => {
                 message.channel.send('User already exists');
             }
             if(result_) {
-                message.channel.send('User added');
+                message.channel.send({embeds: [userAddedEmbed]});
             }
         }
     }
@@ -60,10 +89,10 @@ client.on('message', message => {
             result_ = indexFile.removeUser(user);
 
             if(!result_) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
-                message.channel.send('User removed');
+                message.channel.send({ embeds: [userRemovedEmbed] });
             }
         }
     }
@@ -78,7 +107,7 @@ client.on('message', message => {
             result_ = indexFile.addCr(user, cr);
 
             if(!result_ ) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
                 message.channel.send('Községi Krajcár added');
@@ -96,7 +125,7 @@ client.on('message', message => {
             result_ = indexFile.removeCr(user, cr);
 
             if(!result_) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
                 message.channel.send('Községi Krajcár removed');
@@ -113,7 +142,7 @@ client.on('message', message => {
             result_ = indexFile.getCr(user);
 
             if(result_ === false) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_ || result_ === 0) {
                 message.channel.send('Községi Krajcár: ' + result_);
@@ -130,12 +159,22 @@ client.on('message', message => {
             result_ = indexFile.checkUser(user);
 
             if(!result_) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
-                message.channel.send('User exists');
+                message.channel.send({ embeds: [userExistsembed] });
             }
         }
+    }
+    //check if the message is !crlist and if true get cr to a user with the index.js's function with arugments of the message
+    if(command === 'crlist') 
+    {
+        message.channel.send(indexFile.getCrAll());
+    }
+    //create help command
+    if(command === 'help') 
+    {
+        message.channel.send({ embeds: [helpenbed] });
     }
 
 });

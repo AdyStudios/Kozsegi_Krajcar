@@ -29,6 +29,7 @@ fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
         client.close();
     });
 });
+
 console.log('Watching for file changes');
 
 server.listen(HTTP_PORT);
