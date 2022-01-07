@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Községi krajcár</title>
+    </head>
+    <body>
+        <div class="cont">
+            <h1>Kit szeretnél megnézni?
+            <br><input type="text" name="user" id="usertxt">
+            <button id="send" onclick="btnclick()">Keresés</button>
+            </h1>
+        </div>
+    </body>
+    <style>
+        body {
+            background-color: #222;
+        }
+        h1 {
+            color: #fff;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        input {
+            outline: solid 4px #fff;
+            background-color: unset;
+            color: #fff;
+            border: none;
+            margin: 10px;
+            font-size: xx-large;
+            text-align: center;
+        }
+        button {
+            outline: solid 4px #fff;
+            background-color: unset;
+            color: #fff;
+            border: none;
+            margin-bottom: 10px;
+            font-size: xx-large;
+        }
+        .cont {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10%;
+            box-sizing: content-box;
+            border-radius: 8px;
+            outline: solid 5px #fff;
+        }
+    </style>
+    <script>
+        function btnclick() {
+            //navigate to /view with the usertext input text
+            window.location.href = "/view?" + document.getElementById("usertxt").value;
+        }
+        var input = document.getElementById("usertxt");
+        input.addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) { //13 is the enter key
+                btnclick();
+            }
+        }); 
+    </script>
+</html>
