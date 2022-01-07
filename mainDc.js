@@ -51,7 +51,7 @@ client.on('message', message => {
         }
     }
     //check if the message is !removeUser and if true remove a user with the index.js's function with arugments of the message
-    if(command === 'removeuser') {
+    if(command === 'rmuser') {
         if(args.length < 1) {
             message.channel.send('Please enter a username');
         } else {
@@ -77,7 +77,7 @@ client.on('message', message => {
             var cr = args[1];
             result_ = indexFile.addCr(user, cr);
 
-            if(!result_) {
+            if(!result_ ) {
                 message.channel.send('User does not exist');
             }
             if(result_) {
@@ -86,7 +86,7 @@ client.on('message', message => {
         }
     }
     //check if the message is !removecr and if true remove cr to a user with the index.js's function with arugments of the message
-    if(command === 'removecr') {
+    if(command === 'rmcr') {
         if(args.length < 2) {
             message.channel.send('Please enter a username and cr');
         } else {
@@ -103,6 +103,41 @@ client.on('message', message => {
             }
         }
     }
+    //check if the message is !getcr and if true get cr to a user with the index.js's function with arugments of the message
+    if(command === 'getcr') {
+        if(args.length < 1) {
+            message.channel.send('Please enter a username');
+        } else {
+            var result_ = null;
+            var user = args[0];
+            result_ = indexFile.getCr(user);
+
+            if(result_ === false) {
+                message.channel.send('User does not exist');
+            }
+            if(result_ || result_ === 0) {
+                message.channel.send('Községi Krajcár: ' + result_);
+            }
+        }
+    }
+    //check if the message is !checkUser and if true check if a user exists with the index.js's function with arugments of the message
+    if(command === 'checkuser') {
+        if(args.length < 1) {
+            message.channel.send('Please enter a username');
+        } else {
+            var result_ = null;
+            var user = args[0];
+            result_ = indexFile.checkUser(user);
+
+            if(!result_) {
+                message.channel.send('User does not exist');
+            }
+            if(result_) {
+                message.channel.send('User exists');
+            }
+        }
+    }
+
 });
 
 client.login("OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE");

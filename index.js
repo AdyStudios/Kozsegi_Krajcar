@@ -114,4 +114,15 @@ function checkToken(_token) {
     return false;
 }
 
-module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser };
+function getCr(user) {
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+    for (var i = 0; i < users.length; i++) {
+        if (user === users[i].username) {
+            return users[i].cr;
+        }
+    }
+    return false;
+}
+
+module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr };
