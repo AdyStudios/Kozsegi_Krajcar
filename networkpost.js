@@ -9,7 +9,6 @@ const WEBSOCKET_PORT = 8090;
 const wss = new WebSocket.Server({
     port: WEBSOCKET_PORT
 });
-
 var server = http.createServer(function(req, res) {
     const method = req.method.toLowerCase();
     if (method === 'get') {
@@ -37,6 +36,8 @@ var server = http.createServer(function(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
                 html = html.replace('%%%Name%%%', user);
+                const obj = document.getElementById("%%%Value%%%");
+                //TODO: animate cr value
                 html = html.replace('%%%Value%%%', cr);
                 res.end(html);
                 return;
