@@ -18,7 +18,24 @@ const helpenbed = new MessageEmbed()
     .addField('!crlist', 'Displays the cr of all users. Usage: !crlist')
     .addField('!crset', 'Sets the cr of a user. Usage: !crset <user> <cr>');
 
-const userNotExists
+const userNotExists = new MessageEmbed()
+    .setColor('#ff0000')
+    .setTitle('Error')
+    .setDescription('User does not exist!');
+
+const userExistsembed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('User exists.');
+const userAddedEmbed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('User added.');
+const userRemovedEmbed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('User removed.');
+
 indexFile.addUser('test', 0);
 
 console.log(`Logged in as !`);
@@ -58,7 +75,7 @@ client.on('message', message => {
                 message.channel.send('User already exists');
             }
             if(result_) {
-                message.channel.send('User added');
+                message.channel.send({embeds: [userAddedEmbed]});
             }
         }
     }
@@ -72,10 +89,10 @@ client.on('message', message => {
             result_ = indexFile.removeUser(user);
 
             if(!result_) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
-                message.channel.send('User removed');
+                message.channel.send({ embeds: [userRemovedEmbed] });
             }
         }
     }
@@ -90,7 +107,7 @@ client.on('message', message => {
             result_ = indexFile.addCr(user, cr);
 
             if(!result_ ) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
                 message.channel.send('Községi Krajcár added');
@@ -108,7 +125,7 @@ client.on('message', message => {
             result_ = indexFile.removeCr(user, cr);
 
             if(!result_) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
                 message.channel.send('Községi Krajcár removed');
@@ -125,7 +142,7 @@ client.on('message', message => {
             result_ = indexFile.getCr(user);
 
             if(result_ === false) {
-                message.channel.send('User does not exist');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_ || result_ === 0) {
                 message.channel.send('Községi Krajcár: ' + result_);
@@ -142,10 +159,10 @@ client.on('message', message => {
             result_ = indexFile.checkUser(user);
 
             if(!result_) {
-                message.channel.send('User does not exist!');
+                message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
-                message.channel.send('User exists');
+                message.channel.send({ embeds: [userExistsembed] });
             }
         }
     }

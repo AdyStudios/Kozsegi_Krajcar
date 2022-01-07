@@ -8,11 +8,11 @@
     "cr": 20
   },
   {
-    "username": "test",
-    "cr": 0
-  },
-  {
     "username": "test_elek3",
     "cr": 5
+  },
+  {
+    "username": "test",
+    "cr": "45"
   }
 ]
