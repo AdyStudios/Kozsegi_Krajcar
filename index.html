@@ -32,7 +32,7 @@
             align-items: center;
             margin: 10%;
             box-sizing: content-box;
-            border-radius: 8px;
+            border-radius: 60px;
             outline: solid 5px #fff;
         }
 
@@ -57,10 +57,19 @@
             var spl = inn.split("<br>");
             var frst = spl[0] + "<br>";
             var val = spl[1]; //parseInt("10");
+            var waitTime = 24;
+            var tempi = 0;
             for (var i = 0; i < 60; i++) {
                 document.getElementById('lab').innerHTML = frst + Math.round(val / 60 * i);
                 console.log(Math.round(val / 22 * i));
-                await sleep(15);
+                await sleep(waitTime);
+                if(i > 52){
+                    tempi += 0.5;
+                    waitTime = waitTime + i * tempi;
+                }
+                else if(i < 52){
+                    tempi = 0;
+                }
             }
             document.getElementById('lab').innerHTML = inn;
         }
