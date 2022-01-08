@@ -68,7 +68,7 @@
 
         const socket = new WebSocket('ws://localhost:8090');
         socket.addEventListener('close',()=>{
-            if (!document.URL.includes("/view")) {
+            if (document.URL.includes("/view")) {
                 location.reload();
             }
         });
