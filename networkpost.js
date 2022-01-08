@@ -6,6 +6,9 @@ const WebSocket = require('ws');
 const HTTP_PORT = 8089;
 const WEBSOCKET_PORT = 8090;
 
+var usersRaw;
+var users;
+
 const wss = new WebSocket.Server({
     port: WEBSOCKET_PORT
 });
@@ -16,8 +19,8 @@ var server = http.createServer(function(req, res) {
         console.log('GET request received');
         if (req.url.startsWith('/view')) {
             //fetch users
-            var usersRaw = fs.readFileSync('./users.json');
-            var users = JSON.parse(usersRaw);
+            usersRaw = fs.readFileSync('./users.json');
+            users = JSON.parse(usersRaw);
 
             //get user from url
             var user = req.url.split('?')[1];
@@ -65,9 +68,30 @@ var server = http.createServer(function(req, res) {
 // Listen for file content changes in users.json
 fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
     console.log('File changed');
+
+    //fetch users
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+
+    //get user from url
+    var user = req.url.split('?')[1];
+
+    //get user's cr
+    var cr = 0;
+    var success = false;
+    for (var i = 0; i < users.length; i++) {
+        if (user === users[i].username) {
+            cr = users[i].cr;
+            success = true;
+        }
+    }
     wss.clients.forEach(function(client) {
-        //close connnection with client
-        client.close();
+        // //close connnection with client
+        // client.close();
+        // send message to client
+        client.send(JSON.stringify({
+            type: 'preupdate'
+        }));
     });
 });
 

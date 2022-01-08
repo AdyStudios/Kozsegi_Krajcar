@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -18,7 +19,7 @@
         h1 {
             color: #fff;
             text-align: center;
-            font-size: 8rem;
+            font-size: 6rem;
             font-family: "Century Gothic", Courier, monospace;
 	        opacity: 1;
 	        animation-name: fadeInOpacity;
@@ -50,23 +51,38 @@
         const sleep = (milliseconds) => {
             return new Promise(resolve => setTimeout(resolve, milliseconds))
         }
-        async function some_shit() {
-            //get inner html
-            var lab = document.getElementById('lab');
-            var inn = lab.innerHTML;
-            var spl = inn.split("<br>");
-            var frst = spl[0] + "<br>";
-            var val = spl[1]; //parseInt("10");
+        const frst = document.getElementById('lab').innerHTML.split("<br>")[0] + "<br>";
+
+        async function refreshValue(addVal) {
+            //old inner html value
+            var oldVal = document.getElementById('lab').innerHTML - frst;
             for (var i = 0; i < 60; i++) {
-                document.getElementById('lab').innerHTML = frst + Math.round(val / 60 * i);
-                console.log(Math.round(val / 22 * i));
+                document.getElementById('lab').innerHTML = frst + (Math.round(addVal / 60 * i) + oldVal);
                 await sleep(15);
             }
-            document.getElementById('lab').innerHTML = inn;
+            document.getElementById('lab').innerHTML = frst + (newVal + oldVal);
         }
-        some_shit();
+        // async function some_shit() {
+        //     //get inner html
+        //     var inn = document.getElementById('lab').innerHTML;
+        //     var val = inn.split("<br>")[1];
+        //     for (var i = 0; i < 60; i++) {
+        //         document.getElementById('lab').innerHTML = frst + Math.round(val / 60 * i);
+        //         await sleep(15);
+        //     }
+        //     document.getElementById('lab').innerHTML = inn;
+        // }
 
-        const socket = new WebSocket('ws://localhost:8090');
+        // some_shit();
+
+        var socket = new WebSocket('ws://localhost:8090');
+        
+        socket.addEventListener('message',(event)=>{
+            var data = JSON.parse(event.data);
+            if (data.type == "update") {
+                refreshValue(data.value);
+            }
+        });
         socket.addEventListener('close',()=>{
             if (document.URL.includes("/view")) {
                 location.reload();
