@@ -41,7 +41,6 @@ var server = http.createServer(function(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
                 html = html.replace('%%%Name%%%', user);
-                //TODO: animate cr value
                 html = html.replace('%%%Value%%%', cr);
                 res.end(html);
                 return;
