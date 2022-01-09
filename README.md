@@ -1,7 +1,7 @@
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg?cacheSeconds=2592000)
 ![unstable](https://img.shields.io/badge/unstable-red.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/Documentation-In_Progress-yellow.svg)](https://example.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hema2-official/Kozsegi_Krajcar/blob/main/LICENSE)
 # Kozsegi_Krajcar
 Községi Krajcár Rendszer (open source)
 
