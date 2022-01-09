@@ -8,9 +8,25 @@ const WEBSOCKET_PORT = 8090;
 
 var usersRaw;
 var users;
+var connections = new Map();
 
 const wss = new WebSocket.Server({
     port: WEBSOCKET_PORT
+});
+// when new client connects
+wss.on('connection', function connection(client) {
+    client.on('message', function incoming(message) {
+        var data = JSON.parse(message);
+        if (data.type == 'login') {
+            if (connections.has(client)) {
+                return;
+            }
+            connections.set(client, data.user);
+        }
+    });
+    client.on('close', function close() {
+        connections.delete(client);
+    });
 });
 
 var server = http.createServer(function(req, res) {
@@ -40,6 +56,7 @@ var server = http.createServer(function(req, res) {
             {
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
+                html = html.replace('%%%Name%%%', user);
                 html = html.replace('%%%Name%%%', user);
                 html = html.replace('%%%Value%%%', cr);
                 res.end(html);
@@ -72,25 +89,34 @@ fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
 
-    //get user from url
-    var user = req.url.split('?')[1];
-
-    //get user's cr
-    var cr = 0;
-    var success = false;
-    for (var i = 0; i < users.length; i++) {
-        if (user === users[i].username) {
-            cr = users[i].cr;
-            success = true;
-        }
-    }
     wss.clients.forEach(function(client) {
-        // //close connnection with client
-        // client.close();
-        // send message to client
-        client.send(JSON.stringify({
-            type: 'preupdate'
-        }));
+        //get user from connections
+        var user = connections.get(client);
+        console.log(user);
+        console.log(connections.has(client));
+
+        //get user's cr
+        var cr = 0;
+        var success = false; 
+        for (var i = 0; i < users.length; i++) {
+            if (user === users[i].username) {
+                cr = users[i].cr;
+                success = true;
+            }
+        }
+
+        if (success) {
+            client.send(JSON.stringify({
+                type: 'update',
+                value: cr
+            }));
+        } else {
+            client.send(JSON.stringify({
+                type: 'error',
+                message: "A felhasználó törölve lett."
+            }));
+            client.close();
+        }
     });
 });
 
