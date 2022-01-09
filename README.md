@@ -1,7 +1,7 @@
 ![Version](https://img.shields.io/badge/Version-1.0.0-green.svg?cacheSeconds=2592000)
 ![unstable](https://img.shields.io/badge/unstable-red.svg?cacheSeconds=2592000)
-[![Documentation](https://img.shields.io/badge/Documentation-In_Progress-yellow.svg)]
-[![License: MT]
+[![Documentation](https://img.shields.io/badge/Documentation-In_Progress-yellow.svg)](https://example.org)
+[![License: MIT](https://opensource.org/licenses/MIT)
 # Kozsegi_Krajcar
 Községi Krajcár Rendszer (open source)
 
