@@ -1,5 +1,5 @@
-![Version](https://img.shields.io/badge/alpha-1.0.0_unstable-yellow.svg?cacheSeconds=2592000)
-![stable](https://img.shields.io/badge/alpha-red.svg?cacheSeconds=2592000)
+![Version](https://img.shields.io/badge/1.0.0-green.svg?cacheSeconds=2592000)
+![unstable](https://img.shields.io/badge/alpha-red.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/documentation-In_Progress-yellow.svg)](https://example.org)
 [![License: MT]
 # Kozsegi_Krajcar
