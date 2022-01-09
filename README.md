@@ -7,6 +7,16 @@ Egyszerű Krajcár számláló applikáció, bárkinek akik számolni szeretné.
 
 Docs soon
 
+## Készítők
+👤 **AdyEndre (AdyStudios)**
+* Website: currently down :(
+* Github: [@AdyStudios](https://github.com/AdyStudios)
+* Support: [Patreon](https://patreon.com/adystudios)
+
+👤 **Hema2-official**
+* Github: [@Hema2-official](https://github.com/Hema2-official)
+
+
 # Usage
 Az index.js kezeli az összes felhasználót, viszont csak függvényeket tartalmaz. A függvényeket mi egy Discord bot segítségével érjük el (mainDc.js), de lehetne hozzá egy külön GUI-t csinálni.
 A frontend-ért pedig a networkpost.js és a többi html fájl felelős. Az android applikáció csak egy webvierwer. A hostingot bárhol meg lehet oldani, mivel az url-t nem fogja senki se látni (csak gépen).
