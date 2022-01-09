@@ -16,9 +16,17 @@ Docs soon
 * Website: currently down :(
 * Github: [@AdyStudios](https://github.com/AdyStudios)
 * Support: [Patreon](https://patreon.com/adystudios)
+* Discord: AdyEndre#7784
+(AdyEndre írta a backend-et)
 
 👤 **Hema2-official**
 * Github: [@Hema2-official](https://github.com/Hema2-official)
+* Support: -(hema2 csinálj support oldalt most 🔫)
+* Webiste: (hema2 csinálj oldalt most 🔫🔫)
+* Discord: Hema2#3601
+
+(Hema2 írta a frontend-et)
+![image](https://user-images.githubusercontent.com/74962285/148696448-63dc6158-7e41-4c51-b298-a0a553005a58.png)
 
 
 # Usage
