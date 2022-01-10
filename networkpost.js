@@ -3,15 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const WebSocket = require('ws');
 
-const HTTP_PORT = 8089;
-const WEBSOCKET_PORT = 8090;
+const HTTP_PORT = process.env.PORT || 8089;
 
 var usersRaw;
 var users;
-
-const wss = new WebSocket.Server({
-    port: WEBSOCKET_PORT
-});
+var connections = new Map();
 
 var server = http.createServer(function(req, res) {
     const method = req.method.toLowerCase();
@@ -41,6 +37,7 @@ var server = http.createServer(function(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 var html = fs.readFileSync(__dirname + '/index.html', 'utf8');
                 html = html.replace('%%%Name%%%', user);
+                html = html.replace('%%%Name%%%', user);
                 html = html.replace('%%%Value%%%', cr);
                 res.end(html);
                 return;
@@ -64,6 +61,23 @@ var server = http.createServer(function(req, res) {
     res.end();
 });
 
+const wss = new WebSocket.Server({ server });
+// when new client connects
+wss.on('connection', function connection(client) {
+    client.on('message', function incoming(message) {
+        var data = JSON.parse(message);
+        if (data.type == 'login') {
+            if (connections.has(client)) {
+                return;
+            }
+            connections.set(client, data.user);
+        }
+    });
+    client.on('close', function close() {
+        connections.delete(client);
+    });
+});
+
 // Listen for file content changes in users.json
 fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
     console.log('File changed');
@@ -72,28 +86,37 @@ fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
 
-    //get user from url
-    var user = req.url.split('?')[1];
-
-    //get user's cr
-    var cr = 0;
-    var success = false;
-    for (var i = 0; i < users.length; i++) {
-        if (user === users[i].username) {
-            cr = users[i].cr;
-            success = true;
-        }
-    }
     wss.clients.forEach(function(client) {
-        // //close connnection with client
-        // client.close();
-        // send message to client
-        client.send(JSON.stringify({
-            type: 'preupdate'
-        }));
+        //get user from connections
+        var user = connections.get(client);
+        console.log(user);
+        console.log(connections.has(client));
+
+        //get user's cr
+        var cr = 0;
+        var success = false; 
+        for (var i = 0; i < users.length; i++) {
+            if (user === users[i].username) {
+                cr = users[i].cr;
+                success = true;
+            }
+        }
+
+        if (success) {
+            client.send(JSON.stringify({
+                type: 'update',
+                value: cr
+            }));
+        } else {
+            client.send(JSON.stringify({
+                type: 'error',
+                message: "A felhasználó törölve lett."
+            }));
+            client.close();
+        }
     });
 });
 
 console.log('Watching for file changes');
 
-server.listen(HTTP_PORT);
+server.listen(HTTP_PORT, ()=> console.log('Server listening on port ' + HTTP_PORT));
