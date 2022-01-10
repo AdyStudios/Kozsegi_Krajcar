@@ -15,12 +15,28 @@
     </body>
     <style>
         body {
-            background-color: #222;
+            background-color: #ff0400;
+            
         }
         h1 {
             color: #fff;
             text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
+            font-size: 6rem;
+            font-family: "Century Gothic", Courier, monospace;
+	        opacity: 1;
+	        animation-name: fadeInOpacity;
+	        animation-iteration-count: 1;
+	        animation-timing-function: ease-in;
+	        animation-duration: 0.7s;
+        }
+        .cont {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10%;
+            box-sizing: content-box;
+            border-radius: 50px;
+            outline: solid 20px #fff;
         }
         input {
             outline: solid 4px #fff;
@@ -38,15 +54,6 @@
             border: none;
             margin-bottom: 10px;
             font-size: xx-large;
-        }
-        .cont {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 10%;
-            box-sizing: content-box;
-            border-radius: 8px;
-            outline: solid 5px #fff;
         }
     </style>
     <script>
