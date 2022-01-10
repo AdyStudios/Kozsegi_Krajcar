@@ -1,2 +1,2 @@
 worker: node mainDc.js
-worker: node networkpost.js
+web: node networkpost.js
