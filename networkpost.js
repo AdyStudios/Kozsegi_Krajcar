@@ -4,7 +4,6 @@ const path = require('path');
 const WebSocket = require('ws');
 
 const HTTP_PORT = process.env.PORT;
-console.log(HTTP_PORT);
 const WEBSOCKET_PORT = 8090;
 
 var usersRaw;
@@ -123,4 +122,4 @@ fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
 
 console.log('Watching for file changes');
 
-server.listen(HTTP_PORT);
+server.listen(HTTP_PORT, ()=> console.log('Server listening on port ' + HTTP_PORT));
