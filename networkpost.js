@@ -4,6 +4,7 @@ const path = require('path');
 const WebSocket = require('ws');
 
 const HTTP_PORT = process.env.PORT;
+console.log(HTTP_PORT);
 const WEBSOCKET_PORT = 8090;
 
 var usersRaw;
