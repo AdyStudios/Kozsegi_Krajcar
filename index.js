@@ -70,7 +70,7 @@ function addUser(user, _cr) {
         (
             {
             username: user,
-            cr: _cr
+            cr: parseInt(_cr, 10)
             }
         );
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) 
