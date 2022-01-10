@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const WebSocket = require('ws');
 
-const HTTP_PORT = 80;
+const HTTP_PORT = 90;
 const WEBSOCKET_PORT = 8090;
 
 var usersRaw;
