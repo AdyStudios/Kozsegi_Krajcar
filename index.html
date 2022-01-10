@@ -78,8 +78,9 @@
 
         // some_shit();
 
-        var socket = new WebSocket('ws://localhost:8090');
-        
+        var HOST = location.origin.replace(/^http/, 'ws') // ha http a protokoll, sima ws lesz, de ha https, simán ottmarad a plusz s a wss-hez :D
+        var socket = new WebSocket(HOST);
+
         socket.addEventListener('message',(event)=>{
             var data = JSON.parse(event.data);
             if (data.type == 'update') {

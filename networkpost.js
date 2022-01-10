@@ -3,31 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const WebSocket = require('ws');
 
-const HTTP_PORT = process.env.PORT;
-const WEBSOCKET_PORT = 8090;
+const HTTP_PORT = process.env.PORT || 8089;
 
 var usersRaw;
 var users;
 var connections = new Map();
-
-const wss = new WebSocket.Server({
-    port: WEBSOCKET_PORT
-});
-// when new client connects
-wss.on('connection', function connection(client) {
-    client.on('message', function incoming(message) {
-        var data = JSON.parse(message);
-        if (data.type == 'login') {
-            if (connections.has(client)) {
-                return;
-            }
-            connections.set(client, data.user);
-        }
-    });
-    client.on('close', function close() {
-        connections.delete(client);
-    });
-});
 
 var server = http.createServer(function(req, res) {
     const method = req.method.toLowerCase();
@@ -79,6 +59,23 @@ var server = http.createServer(function(req, res) {
 
     res.writeHead(404);
     res.end();
+});
+
+const wss = new WebSocket.Server({ server });
+// when new client connects
+wss.on('connection', function connection(client) {
+    client.on('message', function incoming(message) {
+        var data = JSON.parse(message);
+        if (data.type == 'login') {
+            if (connections.has(client)) {
+                return;
+            }
+            connections.set(client, data.user);
+        }
+    });
+    client.on('close', function close() {
+        connections.delete(client);
+    });
 });
 
 // Listen for file content changes in users.json
