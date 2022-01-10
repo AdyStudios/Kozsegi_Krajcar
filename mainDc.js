@@ -180,3 +180,5 @@ client.on('message', message => {
 });
 
 client.login("OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE");
+
+console.log('it contnues!');
