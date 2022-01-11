@@ -2,7 +2,7 @@
 ![stabile](https://img.shields.io/badge/stabile-green.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/Documentation-In_Progress-yellow.svg)](https://example.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hema2-official/Kozsegi_Krajcar/blob/main/LICENSE)
-# Kozsegi_Krajcar
+# Községi Krajcár
 Községi Krajcár Rendszer (open source)
 
 Egyszerű Krajcár számláló applikáció, bárkinek akik számolni szeretné.
