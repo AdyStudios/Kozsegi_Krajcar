@@ -37,3 +37,5 @@ Az index.js kezeli az összes felhasználót, viszont csak függvényeket tartal
 A frontend-ért pedig a networkpost.js és a többi html fájl felelős. Az android applikáció csak egy webvierwer. A hostingot bárhol meg lehet oldani, mivel az url-t nem fogja senki se látni (csak gépen), mi [heroku](https://www.heroku.com)-t használtuk.
 Az oldal automatikusan újratölt, ha a fájl változik. Az index.js pedig minden művelet előtt frissíti a JSON-t.
 A felhasználók a users.json fájl-ban vannak tárolva.
+
+HA TUDSZ DOCS OLDALT ÍRD MEG KÖSZ :)
