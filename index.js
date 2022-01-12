@@ -1,9 +1,9 @@
 var fs = require('fs');
+const { setUncaughtExceptionCaptureCallback } = require('process');
 var workDir = './';
 const fileName = './users.json';
 var usersRaw = fs.readFileSync('./users.json');
 var users = JSON.parse(usersRaw);
-var token = require('./token.json');
 
 //create a function to check if the user is in the users.json file
 function checkUser(user) {
@@ -31,8 +31,8 @@ function addCr(user, _cr) {
         }
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
             if (err) return console.log(err);
-            console.log(JSON.stringify(users, null, 2));
-            console.log('writing to ' + fileName);
+            //console.log(JSON.stringify(users, null, 2));
+            //console.log('writing to ' + fileName);
         });
         return true;
     }
@@ -53,8 +53,8 @@ function removeCr(user, _cr) {
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) 
         {
             if (err) return console.log(err);
-            console.log(JSON.stringify(users, null, 2));
-            console.log('writing to ' + fileName);
+            //console.log(JSON.stringify(users, null, 2));
+            //console.log('writing to ' + fileName);
         });
         return true;
     }
@@ -76,8 +76,8 @@ function addUser(user, _cr) {
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) 
         {
             if (err) return console.log(err);
-            console.log(JSON.stringify(users, null, 2));
-            console.log('writing to ' + fileName);
+            //console.log(JSON.stringify(users, null, 2));
+            //console.log('writing to ' + fileName);
             users = require('./users.json');
         });
         return true;
@@ -97,8 +97,8 @@ function removeUser(user) {
         }
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
             if (err) return console.log(err);
-            console.log(JSON.stringify(users, null, 2));
-            console.log('writing to ' + fileName);
+            //console.log(JSON.stringify(users, null, 2));
+            //console.log('writing to ' + fileName);
             users = require('./users.json');
         });
         return true;
@@ -130,4 +130,24 @@ function getCrAll() {
     return users;
 }
 
-module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getCrAll };
+function setCr(user, _cr) {
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+    //check if the user exists
+    if (!checkUser(user)) { return false; }
+    else{
+        for (var i = 0; i < users.length; i++) {
+            if (user === users[i].username) {
+                users[i].cr = parseInt(_cr, 10);
+            }
+        }
+        fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
+            if (err) return console.log(err);
+            users = require('./users.json');
+        });
+        return true;
+    }
+}
+
+
+module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getCrAll, setCr };

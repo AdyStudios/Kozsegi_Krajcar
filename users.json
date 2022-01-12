@@ -13,10 +13,14 @@
   },
   {
     "username": "test",
-    "cr": 550
+    "cr": 0
   },
   {
     "username": "anyukád",
-    "cr": "0"
+    "cr": 0
+  },
+  {
+    "username": "test1",
+    "cr": 0
   }
 ]

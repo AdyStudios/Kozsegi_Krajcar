@@ -37,8 +37,10 @@ const userRemovedEmbed = new MessageEmbed()
     .setDescription('User removed.');
 
 indexFile.addUser('test', 0);
-
-console.log(`Logged in as !`);
+//when the bot is ready send Logged in as {name} to the console
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+});
 //create a ping command
 client.on('message', message => {
     if (message.content === '!ping' && message.channel.id === '928691523913138338') 
@@ -64,7 +66,17 @@ client.on('message', message => {
 
     if(command === 'adduser') {
         if(args.length < 2) {
-            message.channel.send('Please enter a username and cr');
+            var result_ = null;
+            var user = args[0];
+            var cr = 0;
+            result_ = indexFile.addUser(user, cr);
+
+            if(!result_) {
+                message.channel.send('User already exists');
+            }
+            if(result_) {
+                message.channel.send({embeds: [userAddedEmbed]});
+            }
         } else {
             var result_ = null;
             var user = args[0];
@@ -175,6 +187,28 @@ client.on('message', message => {
     if(command === 'help') 
     {
         message.channel.send({ embeds: [helpenbed] });
+    }
+    //check if the message is !setcr and if true set cr to a user with the index.js's function with arugments of the message
+    if(command === 'setcr') {
+        if(args[1] <= 0){
+            message.channel.send('Please enter a valid cr');
+        }
+        else if(args.length < 2) {
+            message.channel.send('Please enter a username and cr');
+        } 
+        else {
+            var result_ = null;
+            var user = args[0];
+            var cr = args[1];
+            result_ = indexFile.setCr(user, cr);
+
+            if(!result_) {
+                message.channel.send({ embeds: [userNotExists] });
+            }
+            if(result_) {
+                message.channel.send('Községi Krajcár Beállítva');
+            }
+        }
     }
 
 });
