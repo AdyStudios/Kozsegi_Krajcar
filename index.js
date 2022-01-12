@@ -124,10 +124,11 @@ function getCr(user) {
     }
     return false;
 }
-function getCrAll() {
+function getJs() {
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
-    return users;
+    return users;jdfihndfvujihnjvxcfukj
+    
 }
 
 function setCr(user, _cr) {
