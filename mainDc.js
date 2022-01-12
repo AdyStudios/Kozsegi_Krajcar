@@ -56,6 +56,16 @@ const crNotEnteredEmbed = new MessageEmbed()
     .setTitle('Error')
     .setDescription('Please enter a valid ammount of cr!');
 
+const crAddedEmbed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('Községi Krajcár hozzáadva.');
+const crRemovedEmbed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('Községi Krajcár eltávolítva.');
+
+
 
 indexFile.addUser('test', 0);
 //when the bot is ready send Logged in as {name} to the console
@@ -143,7 +153,7 @@ client.on('message', message => {
                 message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
-                message.channel.send('Községi Krajcár added');
+                message.channel.send({embeds: [crAddedEmbed]});
             }
         }
     }
@@ -161,7 +171,7 @@ client.on('message', message => {
                 message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
-                message.channel.send('Községi Krajcár removed');
+                message.channel.send({embeds: [crRemovedEmbed]});
             }
         }
     }
@@ -211,7 +221,7 @@ client.on('message', message => {
     }
     //check if the message is !setcr and if true set cr to a user with the index.js's function with arugments of the message
     if(command === 'setcr') {
-        if(args[1] <= 0){
+        if(args[1] < 0){
             message.channel.send({embeds: [crNotEnteredEmbed]});
         }
         else if(args.length < 2) {
