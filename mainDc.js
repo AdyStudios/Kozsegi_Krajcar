@@ -35,6 +35,27 @@ const userRemovedEmbed = new MessageEmbed()
     .setColor('#00ff00')
     .setTitle('Success')
     .setDescription('User removed.');
+const userandcrNotEnteredEmbed = new MessageEmbed()
+    .setColor('#ff0000')
+    .setTitle('Error')
+    .setDescription('Please enter a username and cr!');
+const enterUsernameEmbed = new MessageEmbed()
+    .setColor('#ff0000')
+    .setTitle('Error')
+    .setDescription('Please enter a username!');
+const userAlreadyExistsEmbed = new MessageEmbed()
+    .setColor('#ff0000')
+    .setTitle('Error')
+    .setDescription('User already exists!');
+const crSetEmbed = new MessageEmbed()
+    .setColor('#00ff00')
+    .setTitle('Success')
+    .setDescription('Községi Krajcár Beállítva.');
+const crNotEnteredEmbed = new MessageEmbed()
+    .setColor('#ff0000')
+    .setTitle('Error')
+    .setDescription('Please enter a valid ammount of cr!');
+
 
 indexFile.addUser('test', 0);
 //when the bot is ready send Logged in as {name} to the console
@@ -72,7 +93,7 @@ client.on('message', message => {
             result_ = indexFile.addUser(user, cr);
 
             if(!result_) {
-                message.channel.send('User already exists');
+                message.channel.send({embeds: {userAlreadyExistsEmbed}});
             }
             if(result_) {
                 message.channel.send({embeds: [userAddedEmbed]});
@@ -84,7 +105,7 @@ client.on('message', message => {
             result_ = indexFile.addUser(user, cr);
 
             if(!result_) {
-                message.channel.send('User already exists');
+                message.channel.send({embeds: {userAlreadyExistsEmbed}});
             }
             if(result_) {
                 message.channel.send({embeds: [userAddedEmbed]});
@@ -94,7 +115,7 @@ client.on('message', message => {
     //check if the message is !removeUser and if true remove a user with the index.js's function with arugments of the message
     if(command === 'rmuser') {
         if(args.length < 1) {
-            message.channel.send('Please enter a username');
+            message.channel.send({embeds: [enterUsernameEmbed]});
         } else {
             var result_ = null;
             var user = args[0];
@@ -111,7 +132,7 @@ client.on('message', message => {
     //check if the message is !addcr and if true add cr to a user with the index.js's function with arugments of the message
     if(command === 'addcr') {
         if(args.length < 2) {
-            message.channel.send('Please enter a username and cr');
+            message.channel.send({embers: [userandcrNotEnteredEmbed]});
         } else {
             var result_ = null;
             var user = args[0];
@@ -129,7 +150,7 @@ client.on('message', message => {
     //check if the message is !removecr and if true remove cr to a user with the index.js's function with arugments of the message
     if(command === 'rmcr') {
         if(args.length < 2) {
-            message.channel.send('Please enter a username and cr');
+            message.channel.send({embers: [userandcrNotEnteredEmbed]});
         } else {
             var result_ = null;
             var user = args[0];
@@ -147,7 +168,7 @@ client.on('message', message => {
     //check if the message is !getcr and if true get cr to a user with the index.js's function with arugments of the message
     if(command === 'getcr') {
         if(args.length < 1) {
-            message.channel.send('Please enter a username');
+            message.channel.send({embeds: [enterUsernameEmbed]});
         } else {
             var result_ = null;
             var user = args[0];
@@ -164,7 +185,7 @@ client.on('message', message => {
     //check if the message is !checkUser and if true check if a user exists with the index.js's function with arugments of the message
     if(command === 'checkuser') {
         if(args.length < 1) {
-            message.channel.send('Please enter a username');
+            message.channel.send({embeds: [enterUsernameEmbed]});
         } else {
             var result_ = null;
             var user = args[0];
@@ -191,10 +212,10 @@ client.on('message', message => {
     //check if the message is !setcr and if true set cr to a user with the index.js's function with arugments of the message
     if(command === 'setcr') {
         if(args[1] <= 0){
-            message.channel.send('Please enter a valid cr');
+            message.channel.send({embeds: [crNotEnteredEmbed]});
         }
         else if(args.length < 2) {
-            message.channel.send('Please enter a username and cr');
+            message.channel.send({embers: [userandcrNotEnteredEmbed]});
         } 
         else {
             var result_ = null;
@@ -206,7 +227,7 @@ client.on('message', message => {
                 message.channel.send({ embeds: [userNotExists] });
             }
             if(result_) {
-                message.channel.send('Községi Krajcár Beállítva');
+                message.channel.send({embeds: [crSetEmbed]});
             }
         }
     }
