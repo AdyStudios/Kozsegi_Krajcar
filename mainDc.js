@@ -10,7 +10,7 @@ const { MessageEmbed } = require('discord.js');
 const helpenbed = new MessageEmbed()
     .setColor('#0099ff')
     .setTitle('Help')
-    .setDescription('This is a help command')
+    .setDescription('List of all commands, and syntax.')
     .addField('!help', 'Displays this message. Usage: !help')
     .addField('!addcr', 'Adds cr to a user. Usage: !addcr <user> <cr>')
     .addField('!rmcr', 'Removes cr from a user. Usage: !rmcr <user> <cr>')
