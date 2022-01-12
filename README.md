@@ -30,12 +30,12 @@ Docs soon
 ![image](https://user-images.githubusercontent.com/74962285/148696448-63dc6158-7e41-4c51-b298-a0a553005a58.png)
 ![image](https://user-images.githubusercontent.com/74962285/148696709-e24e904f-5957-46ef-9db5-58119981857a.png)
 
-
-
-# Usage
-Az index.js kezeli az összes felhasználót, viszont csak függvényeket tartalmaz. A függvényeket mi egy Discord bot segítségével érjük el (mainDc.js), de lehetne hozzá egy külön GUI-t csinálni.
-A frontend-ért pedig a networkpost.js és a többi html fájl felelős. Az android applikáció csak egy webvierwer. A hostingot bárhol meg lehet oldani, mivel az url-t nem fogja senki se látni (csak gépen), mi [heroku](https://www.heroku.com)-t használtuk.
-Az oldal automatikusan újratölt, ha a fájl változik. Az index.js pedig minden művelet előtt frissíti a JSON-t.
-A felhasználók a users.json fájl-ban vannak tárolva.
+# 🤝 Közreműködés
+  Közreműködést támogatjuk, ha problémád, kérdésed, panaszod, bánatod, kínod, keservet, siralmad van nyugodtan írj, vagy jelents hibát (Issue-t) itt, githubon!
+# Használat
+  Az index.js kezeli az összes felhasználót, viszont csak függvényeket tartalmaz. A függvényeket mi egy Discord bot segítségével érjük el (mainDc.js), de lehetne hozzá egy külön   GUI-t csinálni.
+  A frontend-ért pedig a networkpost.js és a többi html fájl felelős. Az android applikáció csak egy webvierwer. A hostingot bárhol meg lehet oldani, mivel az url-t nem fogja     senki se látni (csak gépen), mi [heroku](https://www.heroku.com)-t használtuk.
+  Az oldal automatikusan újratölt, ha a fájl változik. Az index.js pedig minden művelet előtt frissíti a JSON-t.
+  A felhasználók a users.json fájl-ban vannak tárolva.
 
 HA TUDSZ DOCS OLDALT ÍRD MEG KÖSZ :)
