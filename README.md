@@ -40,4 +40,3 @@ Docs soon
   A felhasználók a users.json fájl-ban vannak tárolva.
 
 HA TUDSZ DOCS OLDALT ÍRD MEG KÖSZ :)
- 
