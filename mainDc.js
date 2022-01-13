@@ -18,54 +18,33 @@ const helpenbed = new MessageEmbed()
     .addField('!crlist', 'Displays the cr of all users. Usage: !crlist')
     .addField('!crset', 'Sets the cr of a user. Usage: !crset <user> <cr>');
 
-const userNotExists = new MessageEmbed()
-    .setColor('#ff0000')
-    .setTitle('Error')
-    .setDescription('User does not exist!');
-
-const userExistsembed = new MessageEmbed()
-    .setColor('#00ff00')
-    .setTitle('Success')
-    .setDescription('User exists.');
-const userAddedEmbed = new MessageEmbed()
-    .setColor('#00ff00')
-    .setTitle('Success')
-    .setDescription('User added.');
-const userRemovedEmbed = new MessageEmbed()
-    .setColor('#00ff00')
-    .setTitle('Success')
-    .setDescription('User removed.');
-const userandcrNotEnteredEmbed = new MessageEmbed()
-    .setColor('#ff0000')
-    .setTitle('Error')
-    .setDescription('Please enter a username and cr!');
-const enterUsernameEmbed = new MessageEmbed()
-    .setColor('#ff0000')
-    .setTitle('Error')
-    .setDescription('Please enter a username!');
-const userAlreadyExistsEmbed = new MessageEmbed()
-    .setColor('#ff0000')
-    .setTitle('Error')
-    .setDescription('User already exists!');
-const crSetEmbed = new MessageEmbed()
-    .setColor('#00ff00')
-    .setTitle('Success')
-    .setDescription('Községi Krajcár Beállítva.');
-const crNotEnteredEmbed = new MessageEmbed()
-    .setColor('#ff0000')
-    .setTitle('Error')
-    .setDescription('Please enter a valid ammount of cr!');
-
-const crAddedEmbed = new MessageEmbed()
-    .setColor('#00ff00')
-    .setTitle('Success')
-    .setDescription('Községi Krajcár hozzáadva.');
-const crRemovedEmbed = new MessageEmbed()
-    .setColor('#00ff00')
-    .setTitle('Success')
-    .setDescription('Községi Krajcár eltávolítva.');
+const userNotExists = generateEmbed('A felhasználó nem létezik.', true);
+const userExistsembed = generateEmbed("A felhasználó létezik.", false);
+const userAddedEmbed = generateEmbed("Felhasználó hozzáadva.", false);
+const userRemovedEmbed = generateEmbed("Felhasználó eltávolítva.", false);
+const userandcrNotEnteredEmbed = generateEmbed("Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!", true);
+const enterUsernameEmbed = generateEmbed('Kérlek addj meg egy felhasználó nevet!', false);
+const userAlreadyExistsEmbed = generateEmbed('A felhasználó már létezik.', true);
+const crSetEmbed = generateEmbed('Községi Krajcár Beállítva.', false);
+const crNotEnteredEmbed = generateEmbed('Nem érvényes községi krajcár mennyiség!', true);
+const crAddedEmbed = generateEmbed('Községi Krajcár hozzáadva.', false);
+const crRemovedEmbed = generateEmbed("Községi Krajcár eltávolítva.", false);
 
 
+function generateEmbed(_text, _error){
+    if(_error){
+        return new MessageEmbed()
+            .setColor('#ff0000')
+            .setTitle('Error')
+            .setDescription(_text);
+    }
+    else{
+        return new MessageEmbed()
+            .setColor('#00ff00')
+            .setTitle('Success')
+            .setDescription(_text);
+    }
+}
 
 indexFile.addUser('test', 0);
 //when the bot is ready send Logged in as {name} to the console
