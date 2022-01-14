@@ -124,11 +124,11 @@ function getCr(user) {
     }
     return false;
 }
-function getJs() {
+function getJson() {
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
-    return users;jdfihndfvujihnjvxcfukj
-    
+    console.log("retunring users: " + usersRaw);
+    return usersRaw;
 }
 
 function setCr(user, _cr) {
@@ -151,4 +151,4 @@ function setCr(user, _cr) {
 }
 
 
-module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getCrAll, setCr };
+module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getJson, setCr };

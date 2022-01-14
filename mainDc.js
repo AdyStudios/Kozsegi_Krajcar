@@ -3,8 +3,22 @@ const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
-var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.2QnWT_MPS0ri09GpkuQg_RP3J_Y";
+var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE";
 var prefix = "!";
+//push the users.json file changes to the github repository
+function pushChanges() {
+    var exec = require('child_process').exec;
+    exec('git add users.json && git commit -m "users save update" && git push', function (error, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+    });
+}
+
+
+
 
 const { MessageEmbed } = require('discord.js');
 const helpenbed = new MessageEmbed()
@@ -191,7 +205,9 @@ client.on('message', message => {
     //check if the message is !crlist and if true get cr to a user with the index.js's function with arugments of the message
     if(command === 'crlist') 
     {
-        message.channel.send(indexFile.getCrAll());
+        var _js = indexFile.getJson();
+        message.channel.send('```json\n' + _js + '\n```');
+        _js = null;
     }
     //create help command
     if(command === 'help') 
@@ -223,7 +239,7 @@ client.on('message', message => {
 
 });
 
-client.login("OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE");
+client.login(token);
 
 
 const http = require('http');
