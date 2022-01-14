@@ -5,32 +5,24 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 const indexFile = require('./index.js');
 var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE";
 var prefix = "!";
-//push the users.json file changes to the github repository
-function pushChanges() {
-    var exec = require('child_process').exec;
-    exec('git add users.json && git commit -m "users save update" && git push', function (error, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        if (error !== null) {
-            console.log('exec error: ' + error);
-        }
-    });
-}
+
 
 
 
 
 const { MessageEmbed } = require('discord.js');
+//update helpEmbed with the new commands
 const helpenbed = new MessageEmbed()
     .setColor('#0099ff')
     .setTitle('Help')
     .setDescription('List of all commands, and syntax.')
-    .addField('!help', 'Displays this message. Usage: !help')
-    .addField('!addcr', 'Adds cr to a user. Usage: !addcr <user> <cr>')
-    .addField('!rmcr', 'Removes cr from a user. Usage: !rmcr <user> <cr>')
-    .addField('!getcr', 'Displays the cr of a user. Usage: !getcr <user>')
-    .addField('!crlist', 'Displays the cr of all users. Usage: !crlist')
-    .addField('!crset', 'Sets the cr of a user. Usage: !crset <user> <cr>');
+    .addField('!help', 'Megjeleneníti ezt a lapot. Syntax: !help')
+    .addField('!addcr', 'Adott mennyiségű Községi Krajcárt ad egy adott felhasználóhoz. Syntax: !addcr <user> <cr>')
+    .addField('!rmcr', 'Adott mennyiségű Községi Krajcárt távolít el egy adott felhasználótól. Syntax: !rmcr <user> <cr>')
+    .addField('!getcr', 'Megjeleníti egy adott felhasnáló Községi Krajcár egyenlegét. Syntax: !getcr <user>')
+    .addField('!crlist', 'Megjeleníti a ```users.json``` fájlt. Syntax: !crlist')
+    .addField('!crset', 'Beállít egy adott mennyiségű Községi Krajcárt egy adott felhasználónak. Syntax: !crset <user> <cr>')
+    .addField('!checkuser', 'Ellenőrzi, hogy létezik-e egy adott felhasználó. Syntax: !checkuser <user>')
 
 const userNotExists = generateEmbed('A felhasználó nem létezik.', true);
 const userExistsembed = generateEmbed("A felhasználó létezik.", false);
@@ -40,9 +32,12 @@ const userandcrNotEnteredEmbed = generateEmbed("Kérlek add meg a felhasználó 
 const enterUsernameEmbed = generateEmbed('Kérlek addj meg egy felhasználó nevet!', false);
 const userAlreadyExistsEmbed = generateEmbed('A felhasználó már létezik.', true);
 const crSetEmbed = generateEmbed('Községi Krajcár Beállítva.', false);
-const crNotEnteredEmbed = generateEmbed('Nem érvényes községi krajcár mennyiség!', true);
+const crNotEnteredEmbed = generateEmbed('Nem érvényes Községi Krajcár mennyiség!', true);
 const crAddedEmbed = generateEmbed('Községi Krajcár hozzáadva.', false);
 const crRemovedEmbed = generateEmbed("Községi Krajcár eltávolítva.", false);
+const enterNumberEmbed = generateEmbed('Kérlek addj meg egy számot!', false);
+const numberNotEntered = generateEmbed('Nem érvényes szám!', true);
+const purgeEmbed = generateEmbed('Törlés sikeres!.', false);
 
 
 function generateEmbed(_text, _error){
@@ -65,23 +60,7 @@ indexFile.addUser('test', 0);
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
-//create a ping command
-client.on('message', message => {
-    if (message.content === '!ping' && message.channel.id === '928691523913138338') 
-    {
-        message.channel.send('pong');
-    }
-    
-});
 
-//create a purge command
-/*client.on('message', message => {
-    if (message.content === '!purge')
-    {
-        message.channel.bulkDelete(100);
-    }
-});
-*/
 //check if the message is !adduser and if true add a user with the index.js's function with arugments of the message
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return; /*Ignore*/
@@ -236,7 +215,23 @@ client.on('message', message => {
             }
         }
     }
+    //create a purge command
+    if(command === 'purge') {
+        if(args.length < 1) {
+            message.channel.send({embeds: [enterNumberEmbed]});
+        } else {
+            var result_ = null;
+            var number = args[0];
+            result_ = indexFile.purge(number);
 
+            if(!result_) {
+                message.channel.send({ embeds: [numberNotEntered] });
+            }
+            if(result_) {
+                message.channel.send({embeds: [purgeEmbed]});
+            }
+        }
+    }
 });
 
 client.login(token);
