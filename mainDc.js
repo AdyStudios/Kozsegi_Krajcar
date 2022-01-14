@@ -6,10 +6,6 @@ const indexFile = require('./index.js');
 var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE";
 var prefix = "!";
 
-
-
-
-
 const { MessageEmbed } = require('discord.js');
 //update helpEmbed with the new commands
 const helpenbed = new MessageEmbed()
