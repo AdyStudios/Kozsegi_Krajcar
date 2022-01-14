@@ -113,7 +113,6 @@ function checkToken(_token) {
     }
     return false;
 }
-d
 function getCr(user) {
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
