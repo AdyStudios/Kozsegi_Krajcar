@@ -1,7 +1,7 @@
 var fs = require('fs');
 var usersVerRaw = fs.readFileSync('./userversion.json');
 var usersVer = JSON.parse(usersVerRaw);
-const fileName = './users.json';
+const fileName = './userversion.json.json';
 //push the users.json file changes to the github repository
 function pushChanges() {
     fs.readFileSync('./userversion.json');
