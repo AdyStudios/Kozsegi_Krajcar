@@ -233,6 +233,13 @@ client.on('message', message => {
 client.login(token);
 
 
+
+//      _   _______________       ______  ____  __ __
+//     / | / / ____/_  __/ |     / / __ \/ __ \/ //_/
+//    /  |/ / __/   / /  | | /| / / / / / /_/ / ,<   
+//   / /|  / /___  / /   | |/ |/ / /_/ / _, _/ /| |  
+//  /_/ |_/_____/ /_/    |__/|__/\____/_/ |_/_/ |_|  
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -247,14 +254,14 @@ var connections = new Map();
 var server = http.createServer(function(req, res) {
     const method = req.method.toLowerCase();
     if (method === 'get') {
-        console.log('GET request received');
-        if (req.url.startsWith('/view')) {
+        var url = decodeURI(req.url);
+        if (url.startsWith('/view')) {
             //fetch users
             usersRaw = fs.readFileSync('./users.json');
             users = JSON.parse(usersRaw);
 
             //get user from url
-            var user = req.url.split('?')[1];
+            var user = url.split('?')[1];
 
             //get user's cr
             var cr = 0;
@@ -278,11 +285,11 @@ var server = http.createServer(function(req, res) {
                 return;
             }
 
-        } else if (req.url === ('/')) {
+        } else if (url === ('/')) {
             res.writeHead(200, {'Content-Type': 'text/html'});
             fs.createReadStream(__dirname + '/chooser.html').pipe(res);
             return;
-        } else if (req.url === ('/favicon.ico')) {
+        } else if (url === ('/favicon.ico')) {
             fs.createReadStream(__dirname + '/images/favicon.ico').pipe(res);
         }
 
@@ -315,7 +322,7 @@ wss.on('connection', function connection(client) {
 
 // Listen for file content changes in users.json
 fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
-    console.log('File changed');
+    // File changed, reload users
 
     //fetch users
     usersRaw = fs.readFileSync('./users.json');
@@ -324,8 +331,6 @@ fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
     wss.clients.forEach(function(client) {
         //get user from connections
         var user = connections.get(client);
-        console.log(user);
-        console.log(connections.has(client));
 
         //get user's cr
         var cr = 0;
