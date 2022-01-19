@@ -1,10 +1,13 @@
 //make a discord bot that can respond to direct messages
 const Discord = require('discord.js');
+var fs = require('fs');
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
 var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE";
 var prefix = "!";
+client.commands = new Discord.Collection();
+
 
 const { MessageEmbed } = require('discord.js');
 //update helpEmbed with the new commands
@@ -24,8 +27,8 @@ const userNotExists = generateEmbed('A felhasználó nem létezik.', true);
 const userExistsembed = generateEmbed("A felhasználó létezik.", false);
 const userAddedEmbed = generateEmbed("Felhasználó hozzáadva.", false);
 const userRemovedEmbed = generateEmbed("Felhasználó eltávolítva.", false);
-const userandcrNotEnteredEmbed = generateEmbed("Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!", true);
-const enterUsernameEmbed = generateEmbed('Kérlek addj meg egy felhasználó nevet!', false);
+const userandcrNotEnteredEmbed = generateEmbed('Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!', true);
+const enterUsernameEmbed = generateEmbed('Kérlek addj meg egy felhasználó nevet!', true);
 const userAlreadyExistsEmbed = generateEmbed('A felhasználó már létezik.', true);
 const crSetEmbed = generateEmbed('Községi Krajcár Beállítva.', false);
 const crNotEnteredEmbed = generateEmbed('Nem érvényes Községi Krajcár mennyiség!', true);
@@ -57,6 +60,7 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
+
 //check if the message is !adduser and if true add a user with the index.js's function with arugments of the message
 client.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return; /*Ignore*/
@@ -64,29 +68,20 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     if(command === 'adduser') {
-        if(args.length < 2) {
+        if(args.length < 1) {
+            message.channel.send({embeds: [enterUsernameEmbed]});
+        }
+        else if(args.length < 2) {
             var result_ = null;
             var user = args[0];
             var cr = 0;
             result_ = indexFile.addUser(user, cr);
 
             if(!result_) {
-                message.channel.send({embeds: {userAlreadyExistsEmbed}});
+                 message.channel.send({embeds: {userAlreadyExistsEmbed}});
             }
             if(result_) {
-                message.channel.send({embeds: [userAddedEmbed]});
-            }
-        } else {
-            var result_ = null;
-            var user = args[0];
-            var cr = args[1];
-            result_ = indexFile.addUser(user, cr);
-
-            if(!result_) {
-                message.channel.send({embeds: {userAlreadyExistsEmbed}});
-            }
-            if(result_) {
-                message.channel.send({embeds: [userAddedEmbed]});
+                 message.channel.send({embeds: [userAddedEmbed]});
             }
         }
     }
@@ -111,7 +106,8 @@ client.on('message', message => {
     if(command === 'addcr') {
         if(args.length < 2) {
             message.channel.send({embers: [userandcrNotEnteredEmbed]});
-        } else {
+        } 
+        else if(args.length < 3) {
             var result_ = null;
             var user = args[0];
             var cr = args[1];
@@ -231,17 +227,12 @@ client.on('message', message => {
 });
 
 client.login(token);
-
-
-
-//      _   _______________       ______  ____  __ __
 //     / | / / ____/_  __/ |     / / __ \/ __ \/ //_/
 //    /  |/ / __/   / /  | | /| / / / / / /_/ / ,<   
 //   / /|  / /___  / /   | |/ |/ / /_/ / _, _/ /| |  
 //  /_/ |_/_____/ /_/    |__/|__/\____/_/ |_/_/ |_|  
 
 const http = require('http');
-const fs = require('fs');
 const path = require('path');
 const WebSocket = require('ws');
 
