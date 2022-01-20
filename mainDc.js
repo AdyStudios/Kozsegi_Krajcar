@@ -4,7 +4,7 @@ var fs = require('fs');
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
-var token = "OTI4MzAzMDcwNTA3NTg5NzQ0.YdWzmw.KNG8wGvooE7Hb90p6ZCmVP-KtjE";
+const token = process.env.TOKEN;
 var prefix = "!";
 client.commands = new Discord.Collection();
 
