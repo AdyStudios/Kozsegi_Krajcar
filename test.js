@@ -14,6 +14,7 @@ function pushChanges() {
     exec('git add . && git status && git commit -m "users save update v' + usersVer.version + '" && git push -u origin main', function (error, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
+        usersVer.version += 1;
         if (error !== null) {
             console.log('exec error: ' + error);
         }
