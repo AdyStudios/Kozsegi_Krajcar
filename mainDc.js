@@ -4,7 +4,6 @@ var fs = require('fs');
 const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
-const token = process.env.TOKEN;
 var prefix = "!";
 client.commands = new Discord.Collection();
 
@@ -226,7 +225,7 @@ client.on('message', message => {
     }
 });
 
-client.login(token);
+client.login(process.env.token);
 //     / | / / ____/_  __/ |     / / __ \/ __ \/ //_/
 //    /  |/ / __/   / /  | | /| / / / / / /_/ / ,<   
 //   / /|  / /___  / /   | |/ |/ / /_/ / _, _/ /| |  
