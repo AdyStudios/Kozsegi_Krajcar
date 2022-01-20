@@ -26,7 +26,7 @@ const userNotExists = generateEmbed('A felhasználó nem létezik.', true);
 const userExistsembed = generateEmbed("A felhasználó létezik.", false);
 const userAddedEmbed = generateEmbed("Felhasználó hozzáadva.", false);
 const userRemovedEmbed = generateEmbed("Felhasználó eltávolítva.", false);
-const userandcrNotEnteredEmbed = generateEmbed('Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!', true);
+const userAndCrNotEnteredEmbed = generateEmbed('Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!', true);
 const enterUsernameEmbed = generateEmbed('Kérlek addj meg egy felhasználó nevet!', true);
 const userAlreadyExistsEmbed = generateEmbed('A felhasználó már létezik.', true);
 const crSetEmbed = generateEmbed('Községi Krajcár Beállítva.', false);
@@ -35,7 +35,7 @@ const crAddedEmbed = generateEmbed('Községi Krajcár hozzáadva.', false);
 const crRemovedEmbed = generateEmbed("Községi Krajcár eltávolítva.", false);
 const enterNumberEmbed = generateEmbed('Kérlek addj meg egy számot!', false);
 const numberNotEntered = generateEmbed('Nem érvényes szám!', true);
-const purgeEmbed = generateEmbed('Törlés sikeres!.', false);
+const purgeEmbed = generateEmbed('Törlés sikeres!.', false); 
 
 
 function generateEmbed(_text, _error){
@@ -51,6 +51,13 @@ function generateEmbed(_text, _error){
             .setTitle('Success')
             .setDescription(_text);
     }
+}
+function generateTextEmbed(_title, _text, _color)
+{
+    return new MessageEmbed()
+        .setColor(_color)
+        .setTitle(_title)
+        .setDescription(_text);
 }
 
 indexFile.addUser('test', 0);
@@ -104,7 +111,7 @@ client.on('message', message => {
     //check if the message is !addcr and if true add cr to a user with the index.js's function with arugments of the message
     if(command === 'addcr') {
         if(args.length < 2) {
-            message.channel.send({embers: [userandcrNotEnteredEmbed]});
+            message.channel.send({embeds: [userAndCrNotEnteredEmbed]});
         } 
         else if(args.length < 3) {
             var result_ = null;
@@ -123,7 +130,7 @@ client.on('message', message => {
     //check if the message is !removecr and if true remove cr to a user with the index.js's function with arugments of the message
     if(command === 'rmcr') {
         if(args.length < 2) {
-            message.channel.send({embers: [userandcrNotEnteredEmbed]});
+            message.channel.send({embeds: [userAndCrNotEnteredEmbed]});
         } else {
             var result_ = null;
             var user = args[0];
@@ -151,7 +158,7 @@ client.on('message', message => {
                 message.channel.send({ embeds: [userNotExists] });
             }
             if(result_ || result_ === 0) {
-                message.channel.send('Községi Krajcár: ' + result_);
+                message.channel.send({embeds: [generateTextEmbed(user + ' Községi Krajcár egyenlege: ' + result_, '', '#00ff00')]});
             }
         }
     }
@@ -190,7 +197,7 @@ client.on('message', message => {
             message.channel.send({embeds: [crNotEnteredEmbed]});
         }
         else if(args.length < 2) {
-            message.channel.send({embers: [userandcrNotEnteredEmbed]});
+            message.channel.send({embeds: [userandcrNotEnteredEmbed]});
         } 
         else {
             var result_ = null;
