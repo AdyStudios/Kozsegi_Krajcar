@@ -19,7 +19,7 @@ const helpenbed = new MessageEmbed()
     .addField('!rmcr', 'Adott mennyiségű Községi Krajcárt távolít el egy adott felhasználótól. Syntax: !rmcr <user> <cr>')
     .addField('!getcr', 'Megjeleníti egy adott felhasnáló Községi Krajcár egyenlegét. Syntax: !getcr <user>')
     .addField('!crlist', 'Megjeleníti a ```users.json``` fájlt. Syntax: !crlist')
-    .addField('!crset', 'Beállít egy adott mennyiségű Községi Krajcárt egy adott felhasználónak. Syntax: !crset <user> <cr>')
+    .addField('!setcr', 'Beállít egy adott mennyiségű Községi Krajcárt egy adott felhasználónak. Syntax: !crset <user> <cr>')
     .addField('!checkuser', 'Ellenőrzi, hogy létezik-e egy adott felhasználó. Syntax: !checkuser <user>')
 
 const userNotExists = generateEmbed('A felhasználó nem létezik.', true);
