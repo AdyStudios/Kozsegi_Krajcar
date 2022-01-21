@@ -5,15 +5,18 @@ const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
 var prefix = "!";
+var token = fs.readFileSync('token.token', 'utf8');
 client.commands = new Discord.Collection();
 
 
 const { MessageEmbed } = require('discord.js');
 //update helpEmbed with the new commands
 const helpenbed = new MessageEmbed()
-    .setColor('#0099ff')
+    .setColor('#00ffc8')
     .setTitle('Help')
     .setDescription('List of all commands, and syntax.')
+    .addField('!adduser', 'Létrehoz egy új felhasználót. Systax: !adduser <username> <cr>')
+    .addField('!rmuser', 'Törli a megadott felhasználót. Systax: !rmuser <username>')
     .addField('!help', 'Megjeleneníti ezt a lapot. Syntax: !help')
     .addField('!addcr', 'Adott mennyiségű Községi Krajcárt ad egy adott felhasználóhoz. Syntax: !addcr <user> <cr>')
     .addField('!rmcr', 'Adott mennyiségű Községi Krajcárt távolít el egy adott felhasználótól. Syntax: !rmcr <user> <cr>')
@@ -36,6 +39,8 @@ const crRemovedEmbed = generateEmbed("Községi Krajcár eltávolítva.", false)
 const enterNumberEmbed = generateEmbed('Kérlek addj meg egy számot!', false);
 const numberNotEntered = generateEmbed('Nem érvényes szám!', true);
 const purgeEmbed = generateEmbed('Törlés sikeres!.', false); 
+const saveUsersFailed = generateEmbed('A felhasználók mentése sikertelen!', true);
+const saveUsers = generateEmbed('A felhasználók mentése sikeres!', false);
 
 
 function generateEmbed(_text, _error){
@@ -197,7 +202,7 @@ client.on('message', message => {
             message.channel.send({embeds: [crNotEnteredEmbed]});
         }
         else if(args.length < 2) {
-            message.channel.send({embeds: [userandcrNotEnteredEmbed]});
+            message.channel.send({embeds: [userAndCrNotEnteredEmbed]});
         } 
         else {
             var result_ = null;
@@ -230,9 +235,22 @@ client.on('message', message => {
             }
         }
     }
-});
+    //check if the command is !saveusers and if true save the users with the index.js's function with arugments of the message
+    if(command === 'saveusers') {
+        var result_ = null;
+        result_ = indexFile.saveUsers();
 
-client.login(process.env.token);
+        if(!result_) {
+            message.channel.send({ embeds: [saveUsersFailed] });
+        }
+        if(result_) {
+            message.channel.send({ embeds: [saveUsers] });
+        }
+    }
+
+});
+client.login(token);
+//client.login(process.env.token);
 //     / | / / ____/_  __/ |     / / __ \/ __ \/ //_/
 //    /  |/ / __/   / /  | | /| / / / / / /_/ / ,<   
 //   / /|  / /___  / /   | |/ |/ / /_/ / _, _/ /| |  

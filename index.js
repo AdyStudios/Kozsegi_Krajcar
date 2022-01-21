@@ -4,7 +4,30 @@ var workDir = './';
 const fileName = './users.json';
 var usersRaw = fs.readFileSync('./users.json');
 var users = JSON.parse(usersRaw);
+var fs = require('fs');
+var usersVerRaw = fs.readFileSync('./userversion.json');
+var usersVer = JSON.parse(usersVerRaw);
+const verfileName = './userversion.json';
+//push the users.json file changes to the github repository
 
+function pushChanges() {
+    usersVerRaw = fs.readFileSync('./userversion.json');
+    usersVer = JSON.parse(usersVerRaw);
+    var exec = require('child_process').exec;
+    exec('git add . && git status && git commit -m "users save update v' + usersVer.version + '" && git push -u origin main', function (error, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+        usersVer.version += 1;
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+        if(error === null) {
+            fs.writeFile(verfileName, JSON.stringify(usersVer, null, 2), function writeJSON(err) {
+                if (err) return console.log(err);
+            });
+        }
+    });
+}
 //create a function to check if the user is in the users.json file
 function checkUser(user) {
     usersRaw = fs.readFileSync('./users.json');
@@ -26,13 +49,10 @@ function addCr(user, _cr) {
         for (var i = 0; i < users.length; i++) {
             if (user === users[i].username) {
                 users[i].cr += parseInt(_cr, 10);
-                console.log(users[i].cr + ' is in total for ' + user);
             }
         }
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
             if (err) return console.log(err);
-            //console.log(JSON.stringify(users, null, 2));
-            //console.log('writing to ' + fileName);
         });
         return true;
     }
@@ -47,14 +67,11 @@ function removeCr(user, _cr) {
         for (var i = 0; i < users.length; i++) {
             if (user === users[i].username) {
                 users[i].cr -= _cr;
-                console.log(users[i].cr + ' is in total for ' + user);
             }
         }
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) 
         {
             if (err) return console.log(err);
-            //console.log(JSON.stringify(users, null, 2));
-            //console.log('writing to ' + fileName);
         });
         return true;
     }
@@ -76,8 +93,6 @@ function addUser(user, _cr) {
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) 
         {
             if (err) return console.log(err);
-            //console.log(JSON.stringify(users, null, 2));
-            //console.log('writing to ' + fileName);
             users = require('./users.json');
         });
         return true;
@@ -97,8 +112,6 @@ function removeUser(user) {
         }
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
             if (err) return console.log(err);
-            //console.log(JSON.stringify(users, null, 2));
-            //console.log('writing to ' + fileName);
             users = require('./users.json');
         });
         return true;
@@ -126,7 +139,6 @@ function getCr(user) {
 function getJson() {
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
-    console.log("retunring users: " + usersRaw);
     return usersRaw;
 }
 
@@ -149,5 +161,14 @@ function setCr(user, _cr) {
     }
 }
 
+//create a function to commit the changes of the users.json file
+function saveUsers() {
+    fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
+        if (err) return console.log(err);
+        users = require('./users.json');
+    });
+    pushChanges();
+}
 
-module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getJson, setCr };
+
+module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getJson, setCr, saveUsers };
