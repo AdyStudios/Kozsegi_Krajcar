@@ -165,9 +165,11 @@ function setCr(user, _cr) {
 function saveUsers() {
     fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
         if (err) return console.log(err);
+        if(err) return false;
         users = require('./users.json');
     });
     pushChanges();
+    return true;
 }
 
 
