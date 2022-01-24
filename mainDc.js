@@ -5,7 +5,7 @@ const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
 var prefix = "!";
-let token = fs.readFileSync('./token.token', 'utf8');
+let token = process.env.token;
 client.commands = new Discord.Collection();
 
 
