@@ -43,10 +43,12 @@ const saveUsersFailed = generateEmbed('A felhasználók mentése sikertelen!', t
 const saveUsers = generateEmbed('A felhasználók mentése sikeres!', false);
 
 function getToken(){
-    try{
+    try
+    {
         token = process.env.token
     }
-    catch{
+    catch
+    {
         token = fs.readFileSync('token.token', 'utf8');
     }
 } 
