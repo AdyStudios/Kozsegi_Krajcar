@@ -5,7 +5,7 @@ const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
 var prefix = "!";
-var token = null;
+let token = fs.readFileSync('./token.token', 'utf8');
 client.commands = new Discord.Collection();
 
 
@@ -42,18 +42,6 @@ const purgeEmbed = generateEmbed('Törlés sikeres!.', false);
 const saveUsersFailed = generateEmbed('A felhasználók mentése sikertelen!', true);
 const saveUsers = generateEmbed('A felhasználók mentése sikeres!', false);
 
-function getToken(){
-    try
-    {
-        token = process.env.token
-    }
-    catch
-    {
-        token = fs.readFileSync('token.token', 'utf8');
-    }
-} 
-
-getToken();
 
 function generateEmbed(_text, _error){
     if(_error){

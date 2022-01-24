@@ -10,6 +10,8 @@
         <div class="cont">
             <h1 id="lab">%%%Name%%% Községi Krajcár egyenlege: <br>0</h1>
         </div>
+        <br><input type="text" name="user" id="usertxt">
+        <button id="send" onclick="btnclick()">Keresés</button>
     </body>
     <style>
         body {
@@ -37,7 +39,29 @@
             border-radius: 60px;
             outline: solid 5px #fff;
         }
-
+        input {
+            outline: solid 4px #fff;
+            background-color: unset;
+            color: #fff;
+            font-family: 'Century Gothic', monospace;
+            box-sizing: content-box;
+            border-radius: 2px;
+            outline: solid 2px #fff;
+            margin: 10px;
+            font-size: xx-large;
+            text-align: center;
+        }
+        button {
+            outline: solid 4px #fff;
+            background-color: unset;
+            color: #fff;
+            box-sizing: content-box;
+            border-radius: 10px;
+            outline: solid 2px #fff;
+            margin-bottom: 10px;
+            font-family: 'Century Gothic', monospace;
+            font-size: xx-large;
+        }
         @keyframes fadeInOpacity {
         	0% {
         		opacity: 0;
@@ -56,6 +80,10 @@
     </style>
     <script type="text/javascript">
         //TODO: change background color by cr ammount
+        function btnclick() {
+                //navigate to /view with the usertext input text
+                window.location.href = "/view?" + document.getElementById("usertxt").value;
+            }
         const sleep = (milliseconds) => {
             return new Promise(resolve => setTimeout(resolve, milliseconds))
         }

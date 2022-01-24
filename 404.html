@@ -7,8 +7,10 @@
     </head>
     <body>
         <div class="cont">
-            <h1>Valami nem jött össze... Próbáld meg újra később, vagy írj az adminoknak! - (Hema2, AdyEndre)</h1>
+            <h1>A felhasználó valószívűleg nem létezik! Ha nem ez a probléma vedd fel a kapcsolatot az adminokkal - (AdyEndre#7784, Hema2)</h1>
         </div>
+        <br><input type="text" name="user" id="usertxt">
+        <button id="send" onclick="btnclick()">Keresés</button>
     </body>
     <style>
         body {
@@ -28,6 +30,35 @@
             box-sizing: content-box;
             border-radius: 8px;
             outline: solid 5px #fff;
+        }
+        input {
+            outline: solid 4px #fff;
+            background-color: unset;
+            color: #fff;
+            font-family: 'Century Gothic', monospace;
+            box-sizing: content-box;
+            border-radius: 2px;
+            outline: solid 2px #fff;
+            margin: 10px;
+            font-size: xx-large;
+            text-align: center;
+        }
+        button {
+            outline: solid 4px #fff;
+            background-color: unset;
+            color: #fff;
+            box-sizing: content-box;
+            border-radius: 10px;
+            outline: solid 2px #fff;
+            margin-bottom: 10px;
+            font-family: 'Century Gothic', monospace;
+            font-size: xx-large;
+            text-align: center;
+        }
+        @media screen and (max-width: 1080px) {
+            h1 {
+                font-size: 3rem;
+            }
         }
     </style>
 </html>
