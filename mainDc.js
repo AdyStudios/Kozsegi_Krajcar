@@ -251,13 +251,13 @@ client.on('message', message => {
     }
     //check if the command is !leaderboards and if true get the leaderboards with the index.js's function with arugments of the message
     if(command === 'leaderboards') {
-        if(args.length < 1)
+        /*if(args.length < 1)
         {
             message.channel.send({embeds: [enterNumberEmbed]});
             return;
-        }
-        else
-        {
+        }*/
+        //else
+        //{
             var result_ = null;
             result_ = indexFile.getLeaderboards(args[0]);
 
@@ -267,9 +267,9 @@ client.on('message', message => {
             }
             if(result_) {
                 message.channel.send({ embeds: [leaderboardsSucces] });
-                message.channel.send('```json\n' + result_ + '\n```')
+                message.channel.send('```json\n' + JSON.stringify(result_) + '\n```')
             }
-        }
+        //}
     }
 
 });
@@ -279,6 +279,29 @@ client.login(token);
 //    /  |/ / __/   / /  | | /| / / / / / /_/ / ,<   
 //   / /|  / /___  / /   | |/ |/ / /_/ / _, _/ /| |  
 //  /_/ |_/_____/ /_/    |__/|__/\____/_/ |_/_/ |_|  
+/*
+              ,---------------------------,
+              |  /---------------------\  |
+              | |                       | |
+              | |        Községi        | |
+              | |        Krajcár        | |
+              | |        Network        | |
+              | |                       | |
+              |  \_____________________/  |
+              |___________________________|
+            ,---\_____     []     _______/------,
+          /         /______________\           /|
+        /___________________________________ /  | ___
+        |                                   |   |    )
+        |  _ _ _                 [-------]  |   |   (
+        |  o o o                 [-------]  |  /    _)_
+        |__________________________________ |/     /  /
+    /-------------------------------------/|      ( )/
+  /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/ /
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
 
 const http = require('http');
 const path = require('path');
@@ -335,12 +358,14 @@ var server = http.createServer(function(req, res) {
         }
         else if(url === ('/leaderboards.html'))
         {
-            console.log('leaderboards opened');
+            //TODO: fix leaderboard forammting
+            usersRaw = fs.readFileSync('./users.json');
+            users = JSON.parse(usersRaw);
             var html = fs.readFileSync(__dirname + '/leaderboards.html', 'utf8');
-            html = html.replace('%%%LB%%%', indexFile.getLeaderboards(5));
+            var _leadeboards = JSON.stringify(indexFile.getLeaderboards(users.length));
+            html = html.replace('%%%LB%%%', _leadeboards);
             fs.createReadStream(__dirname + '/leaderboards.html').pipe(res);
             res.end(html);
-            console.log(html);
             return;
         }
 
@@ -392,7 +417,7 @@ fs.watchFile(path.join(__dirname, 'users.json'), function(curr, prev) {
                 success = true;
             }
         }
-
+        //TODO: send update to leaderboards @Hema2 !!!!!
         if (success) {
             client.send(JSON.stringify({
                 type: 'update',

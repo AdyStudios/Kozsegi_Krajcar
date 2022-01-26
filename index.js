@@ -5,6 +5,7 @@ const fileName = './users.json';
 var usersRaw = fs.readFileSync('./users.json');
 var users = JSON.parse(usersRaw);
 var fs = require('fs');
+const { isFloat32Array } = require('util/types');
 var usersVerRaw = fs.readFileSync('./userversion.json');
 var usersVer = JSON.parse(usersVerRaw);
 const verfileName = './userversion.json';
@@ -172,18 +173,20 @@ function saveUsers() {
     return true;
 }
 
-function getLeaderboards(topnum){
+function getLeaderboards(topnum)
+{
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
-    if(topnum > users.length)
+    console.log(users);
+    /*if(topnum > users.length)
     {
         return false;
-    }
-    var leaderboards = [];
-    for (var i = 0; i < topnum; i++) {
-        leaderboards.push(users[i].username + ': ' + users[i].cr);
-    }
+    }*/
+    var leaderboards = JSON.parse(usersRaw);
     console.log(leaderboards);
+    leaderboards.sort(function (a,b){
+        return b.cr - a.cr;
+    });
     return leaderboards;
 }
 
