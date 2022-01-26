@@ -5,7 +5,8 @@ const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
 var prefix = "!";
-let token = process.env.token;
+//let token = process.env.token;
+let token = fs.readFileSync('./token.token', 'utf8');
 client.commands = new Discord.Collection();
 
 
@@ -36,12 +37,13 @@ const crSetEmbed = generateEmbed('Községi Krajcár Beállítva.', false);
 const crNotEnteredEmbed = generateEmbed('Nem érvényes Községi Krajcár mennyiség!', true);
 const crAddedEmbed = generateEmbed('Községi Krajcár hozzáadva.', false);
 const crRemovedEmbed = generateEmbed("Községi Krajcár eltávolítva.", false);
-const enterNumberEmbed = generateEmbed('Kérlek addj meg egy számot!', false);
+const enterNumberEmbed = generateEmbed('Kérlek addj meg egy számot!', true);
 const numberNotEntered = generateEmbed('Nem érvényes szám!', true);
 const purgeEmbed = generateEmbed('Törlés sikeres!.', false); 
 const saveUsersFailed = generateEmbed('A felhasználók mentése sikertelen!', true);
 const saveUsers = generateEmbed('A felhasználók mentése sikeres!', false);
-
+const leaderboardsFailed = generateEmbed('A ranglista lekérése sikertelen!', true);
+const leaderboardsSucces = generateEmbed('A ranglista lekérése sikeres!', false);
 
 function generateEmbed(_text, _error){
     if(_error){
@@ -247,6 +249,28 @@ client.on('message', message => {
             message.channel.send({ embeds: [saveUsers] });
         }
     }
+    //check if the command is !leaderboards and if true get the leaderboards with the index.js's function with arugments of the message
+    if(command === 'leaderboards') {
+        if(args.length < 1)
+        {
+            message.channel.send({embeds: [enterNumberEmbed]});
+            return;
+        }
+        else
+        {
+            var result_ = null;
+            result_ = indexFile.getLeaderboards(args[0]);
+
+            if(result_ === null || result_ === false) {
+                message.channel.send({ embeds: [leaderboardsFailed] });
+
+            }
+            if(result_) {
+                message.channel.send({ embeds: [leaderboardsSucces] });
+                message.channel.send('```json\n' + result_ + '\n```')
+            }
+        }
+    }
 
 });
 client.login(token);
@@ -300,12 +324,24 @@ var server = http.createServer(function(req, res) {
                 return;
             }
 
-        } else if (url === ('/')) {
+        } 
+        else if (url === ('/')) {
             res.writeHead(200, {'Content-Type': 'text/html'});
             fs.createReadStream(__dirname + '/chooser.html').pipe(res);
             return;
-        } else if (url === ('/favicon.ico')) {
+        } 
+        else if (url === ('/favicon.ico')) {
             fs.createReadStream(__dirname + '/images/favicon.ico').pipe(res);
+        }
+        else if(url === ('/leaderboards.html'))
+        {
+            console.log('leaderboards opened');
+            var html = fs.readFileSync(__dirname + '/leaderboards.html', 'utf8');
+            html = html.replace('%%%LB%%%', indexFile.getLeaderboards(5));
+            fs.createReadStream(__dirname + '/leaderboards.html').pipe(res);
+            res.end(html);
+            console.log(html);
+            return;
         }
 
         //send error if unsuccessful

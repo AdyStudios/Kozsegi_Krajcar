@@ -175,10 +175,15 @@ function saveUsers() {
 function getLeaderboards(topnum){
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
+    if(topnum > users.length)
+    {
+        return false;
+    }
     var leaderboards = [];
     for (var i = 0; i < topnum; i++) {
         leaderboards.push(users[i].username + ': ' + users[i].cr);
     }
+    console.log(leaderboards);
     return leaderboards;
 }
 
