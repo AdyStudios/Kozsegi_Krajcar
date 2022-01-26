@@ -29,8 +29,6 @@ Docs soon
 ![image](https://user-images.githubusercontent.com/74962285/148696709-e24e904f-5957-46ef-9db5-58119981857a.png)
 
 # 🤝 Contributors
-  Közreműködést támogatjuk, ha javaslatod, problémád, kérdésed, panaszod, bánatod, kínod, keservet, siralmad van nyugodtan írj, vagy jelents hibát (Issue-t) itt, githubon!
-  Ha forkolod a a repo-t akkor kérlek említs meg minket 🙏 ;).
   We support contribution, if you have a suggestion, problem, question or anyting, feel free to drop us a line or submit an issue, here on github. If you fork, you HAVE TO mention us ;)
 # Usage
   DOCS COMING SOON! I promise!
