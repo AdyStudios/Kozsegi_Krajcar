@@ -5,7 +5,6 @@ const fileName = './users.json';
 var usersRaw = fs.readFileSync('./users.json');
 var users = JSON.parse(usersRaw);
 var fs = require('fs');
-const { isFloat32Array } = require('util/types');
 var usersVerRaw = fs.readFileSync('./userversion.json');
 var usersVer = JSON.parse(usersVerRaw);
 const verfileName = './userversion.json';
