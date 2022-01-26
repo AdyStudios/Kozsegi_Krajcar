@@ -172,5 +172,15 @@ function saveUsers() {
     return true;
 }
 
+function getLeaderboards(topnum){
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+    var leaderboards = [];
+    for (var i = 0; i < topnum; i++) {
+        leaderboards.push(users[i].username + ': ' + users[i].cr);
+    }
+    return leaderboards;
+}
 
-module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getJson, setCr, saveUsers };
+
+module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getJson, setCr, saveUsers, getLeaderboards };
