@@ -176,13 +176,11 @@ function getLeaderboards(topnum)
 {
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
-    console.log(users);
     /*if(topnum > users.length)
     {
         return false;
     }*/
     var leaderboards = JSON.parse(usersRaw);
-    console.log(leaderboards);
     leaderboards.sort(function (a,b){
         return b.cr - a.cr;
     });
