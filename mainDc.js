@@ -5,7 +5,7 @@ const { Client, Intents } = require('discord.js');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const indexFile = require('./index.js');
 var prefix = "!";
-let token = process.env.token;
+let token = process.env.token || fs.readFileSync('./token.token', 'utf8');
 //let token = fs.readFileSync('./token.token', 'utf8');
 client.commands = new Discord.Collection();
 
@@ -356,7 +356,7 @@ var server = http.createServer(function(req, res) {
         else if (url === ('/favicon.ico')) {
             fs.createReadStream(__dirname + '/images/favicon.ico').pipe(res);
         }
-        else if(url === ('/leaderboards.html'))
+        else if(url === ('/leaderboards'))
         {
             //TODO: fix leaderboard forammting
             usersRaw = fs.readFileSync('./users.json');
