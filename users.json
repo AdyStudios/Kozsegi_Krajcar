@@ -13,7 +13,7 @@
   },
   {
     "username": "test",
-    "cr": 0
+    "cr": 1000
   },
   {
     "username": "anyukád",
@@ -34,5 +34,13 @@
   {
     "username": "anyud",
     "cr": 0
+  },
+  {
+    "username": "matyi",
+    "cr": -40
+  },
+  {
+    "username": "zsömi",
+    "cr": 100
   }
 ]
