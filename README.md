@@ -9,10 +9,10 @@ Simple coin counter application, for anyone who wants it.
 
 Docs soon
 
-// * TODO: Tags or Flags
-// * TODO: undo
-// * TODO: if 1. arg is '_' then use last user
-//TODO: Checkmate everyone
+* //TODO: Tags or Flags
+* //TODO: undo
+* //TODO: if 1. arg is '_' then use last user
+* //TODO: Checkmate everyone
 
 ## Arthours
 👤 **AdyEndre (AdyStudios)**
