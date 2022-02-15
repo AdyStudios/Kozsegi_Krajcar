@@ -2,7 +2,7 @@
 ![stabile](https://img.shields.io/badge/stabile-green.svg?cacheSeconds=2592000)
 [![Documentation](https://img.shields.io/badge/Documentation-In_Progress-yellow.svg)](https://example.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hema2-official/Kozsegi_Krajcar/blob/main/LICENSE)
-# Községi Krajcár [![HUN VERSION](https://img.shields.io/badge/Hun-Version-green.svg)](https://github.com/AdyStudios/Kozsegi_Krajcar/main/READMEHUN.md)
+# Községi Krajcár [![HUN VERSION](https://img.shields.io/badge/Hun-Version-green.svg)](https://github.com/AdyStudios/Kozsegi_Krajcar/blob/main/Docs/HUNREADME.md)
 Községi Krajcár System (open source) (originally by AdyEndre)
 
 Simple coin counter application, for anyone who wants it.
