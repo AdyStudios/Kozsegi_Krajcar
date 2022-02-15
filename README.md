@@ -19,8 +19,8 @@ Docs soon
 
 👤 **Hema2-official**
 * Github: [@Hema2-official](https://github.com/Hema2-official)
-* Support: -(hema2 csinálj support oldalt most 🔫)
-* Webiste: (hema2 csinálj oldalt most 🔫🔫)
+* Support: -(hema2 make a support page now 🔫)
+* Webiste: (hema2 make a site NOW 🔫🔫)
 * Discord: Hema2#3601
 * (Hema2 he wrote the frontend 🤮)
 
