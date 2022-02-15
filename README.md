@@ -12,6 +12,7 @@ Docs soon
 // * TODO: Tags or Flags
 // * TODO: undo
 // * TODO: if 1. arg is '_' then use last user
+//TODO: Checkmate everyone
 
 ## Arthours
 👤 **AdyEndre (AdyStudios)**
