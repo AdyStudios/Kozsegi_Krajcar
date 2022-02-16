@@ -253,9 +253,11 @@ client.on('message', message => {
     }
     //check if the command is !addflag and if true add a flag to a user with the index.js's function with arugments of the message
     if(command === 'addflag') {
+        console.log("addflag");
         if(args.length < 2) {
             message.channel.send({embeds: [userAndFlagNotEnteredEmbed]});
         } else {
+            console.log("addflagelse");
             var result_ = null;
             var user = args[0];
             var flag = args[1];

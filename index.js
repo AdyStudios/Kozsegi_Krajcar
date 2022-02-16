@@ -196,7 +196,7 @@ function addFlag(user, _flag)
     {
         for (var i = 0; i < users.length; i++) {
             if (user === users[i].username) {
-                users[i].splice(i.flags, 0, _flag);
+                users.splice(i.flags, 0, _flag);
             }
         }
         fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
