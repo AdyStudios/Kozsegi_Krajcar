@@ -1,43 +1,13 @@
-var data = [
-    {
-    "username": "test_elek1",
-    "cr": 0
-  },
-  {
-    "username": "test_elek2",
-    "cr": 20
-  },
-  {
-    "username": "test_elek3",
-    "cr": 57000
-  },
-  {
-    "username": "test",
-    "cr": 0
-  },
-  {
-    "username": "anyukád",
-    "cr": 0
-  },
-  {
-    "username": "test1",
-    "cr": 5
-  },
-  {
-    "username": "zsiga",
-    "cr": 0
-  },
-  {
-    "username": "l",
-    "cr": 500
-  },
-  {
-    "username": "anyud",
-    "cr": 0
-  }
-];
+var fs = require('fs');
 
-data.sort(function (a,b){
-    return b.cr - a.cr;
+var usersRaw = fs.readFileSync('./users.json');
+var users = JSON.parse(usersRaw);0
+
+users[2].flag = "flag1";
+console.log(users[2].flag);
+
+fs.writeFile('./users.json', JSON.stringify(users, null, 2), function writeJSON(err) 
+{
+  if (err) return console.log(err);
+  users = require('./users.json');
 });
-console.log(data);

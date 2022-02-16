@@ -25,6 +25,7 @@ const helpenbed = new MessageEmbed()
     .addField('!crlist', 'Megjeleníti a ```users.json``` fájlt. Syntax: !crlist')
     .addField('!setcr', 'Beállít egy adott mennyiségű Községi Krajcárt egy adott felhasználónak. Syntax: !crset <user> <cr>')
     .addField('!checkuser', 'Ellenőrzi, hogy létezik-e egy adott felhasználó. Syntax: !checkuser <user>')
+    .addField('!saveusers', 'Menti a ```users.json``` fájlt. Syntax: !saveusers')
 
 const userNotExists = generateEmbed('A felhasználó nem létezik.', true);
 const userExistsembed = generateEmbed("A felhasználó létezik.", false);
@@ -44,6 +45,7 @@ const saveUsersFailed = generateEmbed('A felhasználók mentése sikertelen!', t
 const saveUsers = generateEmbed('A felhasználók mentése sikeres!', false);
 const leaderboardsFailed = generateEmbed('A ranglista lekérése sikertelen!', true);
 const leaderboardsSucces = generateEmbed('A ranglista lekérése sikeres!', false);
+const userAndFlagNotEnteredEmbed = generateEmbed('Kérlek add meg a felhasználó nevet és a flaget!', true);
 
 function generateEmbed(_text, _error){
     if(_error){
@@ -247,6 +249,24 @@ client.on('message', message => {
         }
         if(result_) {
             message.channel.send({ embeds: [saveUsers] });
+        }
+    }
+    //check if the command is !addflag and if true add a flag to a user with the index.js's function with arugments of the message
+    if(command === 'addflag') {
+        if(args.length < 2) {
+            message.channel.send({embeds: [userAndFlagNotEnteredEmbed]});
+        } else {
+            var result_ = null;
+            var user = args[0];
+            var flag = args[1];
+            result_ = indexFile.addFlag(user, flag);
+
+            if(!result_) {
+                message.channel.send({ embeds: [userNotExists] });
+            }
+            if(result_) {
+                message.channel.send("Flag hozzáadva!\n" + result_);
+            }
         }
     }
     //check if the command is !leaderboards and if true get the leaderboards with the index.js's function with arugments of the message

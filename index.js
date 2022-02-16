@@ -187,5 +187,72 @@ function getLeaderboards(topnum)
     return leaderboards;
 }
 
+function addFlag(user, _flag)
+{
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+    if (!checkUser(user)) { return false; }
+    else
+    {
+        for (var i = 0; i < users.length; i++) {
+            if (user === users[i].username) {
+                users[i].splice(i.flags, 0, _flag);
+            }
+        }
+        fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
+            if (err) return console.log(err);
+            users = require('./users.json');
+        });
+        return true;
+    }
 
-module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getJson, setCr, saveUsers, getLeaderboards };
+}
+
+function checkFlag(user)
+{
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+    if (!checkUser(user)) { return false; }
+    else
+    {
+        for (var i = 0; i < users.length; i++) {
+            if (user === users[i].username) {
+                if(users[i].flag.length != null)
+                {
+                    return users[i].flag;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+    }
+}
+//create a function to remove a flag from a specific user
+function removeFlag(user, _flag) {
+    usersRaw = fs.readFileSync('./users.json');
+    users = JSON.parse(usersRaw);
+    if (!checkUser(user)) { return false; }
+    else
+    {
+        for (var i = 0; i < users.length; i++) {
+            if (user === users[i].username) {
+                for(var j = 0; j < users[i].flags.length; j++)
+                {
+                    if(users[i].flags[j] === _flag)
+                    {
+                        users[i].flag.splice(j, 1);
+                    }
+                }
+            }
+        }
+        fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
+            if (err) return console.log(err);
+            users = require('./users.json');
+        });
+        return true;
+    }
+}
+
+module.exports = { checkUser, addCr, removeCr, addUser, checkToken, removeUser, getCr, getJson, setCr, saveUsers, getLeaderboards, addFlag, checkFlag, removeFlag };

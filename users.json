@@ -1,46 +1,79 @@
 [
   {
     "username": "test_elek1",
-    "cr": 0
+    "cr": 0,
+    "flags":
+    [
+    ]
   },
   {
     "username": "test_elek2",
-    "cr": 20
+    "cr": 20,
+    "flags":
+    [
+    ]
   },
   {
     "username": "test_elek3",
-    "cr": 57000
+    "cr": 57000,
+    "flags":
+    [
+    ]
   },
   {
     "username": "test",
-    "cr": 1000
+    "cr": 1000,
+    "flags":
+    [
+    ]
   },
   {
     "username": "anyukád",
-    "cr": 0
+    "cr": 0,
+    "flags":
+    [
+    ]
   },
   {
     "username": "test1",
-    "cr": 5
+    "cr": 5,
+    "flags":
+    [
+    ]
   },
   {
     "username": "zsiga",
-    "cr": 0
+    "cr": 0,
+    "flags":
+    [
+    ]
   },
   {
     "username": "l",
-    "cr": 500
+    "cr": 500,
+    "flags":
+    [
+    ]
   },
   {
     "username": "anyud",
-    "cr": 0
+    "cr": 0,
+    "flags":
+    [
+    ]
   },
   {
     "username": "matyi",
-    "cr": -40
+    "cr": -40,
+    "flags":
+    [
+    ]
   },
   {
     "username": "zsömi",
-    "cr": 100
+    "cr": 100,
+    "flags":
+    [
+    ]
   }
 ]
