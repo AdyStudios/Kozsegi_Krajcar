@@ -263,11 +263,26 @@ client.on('message', message => {
             var flag = args[1];
             result_ = indexFile.addFlag(user, flag);
 
-            if(!result_) {
+            if(!result_) 
+            {
                 message.channel.send({ embeds: [userNotExists] });
             }
-            if(result_) {
+            if(result_ != false) 
+            {
                 message.channel.send("Flag hozzáadva!\n" + result_);
+                //TODO:check if role arleady exists
+                var role = message.author.guild.roles.cache.find("name", result_);
+                if(role!= null) return;
+                message.guild.createRole({
+                    name: result_, 
+                    color: '#00ff00',
+                    permissions: []
+                }).then(function(role) {
+                    message.guild.members.forEach(function(member) {
+                        if(member.roles.has(role.id) && member.id === users[args[1]].discordid) return;
+                        member.addRole(role);
+                    });
+                });
             }
         }
     }

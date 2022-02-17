@@ -194,16 +194,23 @@ function addFlag(user, _flag)
     if (!checkUser(user)) { return false; }
     else
     {
-        for (var i = 0; i < users.length; i++) {
-            if (user === users[i].username) {
-                users.splice(i.flags, 0, _flag);
+        var i = 0;
+        var succ = false;
+        while(!succ) {
+            if (user === users[i].username) 
+            {
+                users[i].flags.push(_flag);
+                succ = true;
             }
+            i++;
         }
-        fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err) {
+
+        fs.writeFile(fileName, JSON.stringify(users, null, 2), function writeJSON(err)
+         {
             if (err) return console.log(err);
             users = require('./users.json');
         });
-        return true;
+        return _flag;
     }
 
 }
