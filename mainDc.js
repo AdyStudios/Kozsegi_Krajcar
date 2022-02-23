@@ -9,33 +9,68 @@ let token = process.env.token || fs.readFileSync('./token.token', 'utf8');
 //let token = fs.readFileSync('./token.token', 'utf8');
 client.commands = new Discord.Collection();
 
+//Language variables
+//Hungarian variables
+var helpTitle = "Segítség";
+var helpDescription = "A parancsok listája.";
+var helpAdduser = "Létrehoz egy új felhasználót. Systax: !adduser <username> <cr>";
+var helprmuser = "Törli a megadott felhasználót. Systax: !rmuser <username>";
+var helpHelp = "Megjeleneníti ezt a lapot. Syntax: !help";
+var helpaddcr = "Adott mennyiségű Községi Krajcárt ad egy adott felhasználóhoz. Syntax: !addcr <user> <cr>";
+var helprmcr = "Törli a megadott felhasználót. Systax: !rmuser <username>";
+var helpgetcr = "Megjeleníti egy adott felhasnáló Községi Krajcár egyenlegét. Syntax: !getcr <user>";
+var helpcrlist = "Megjeleníti a ```users.json``` fájlt. Syntax: !crlist";
+var helpsetcr = "Beállít egy adott mennyiségű Községi Krajcárt egy adott felhasználónak. Syntax: !crset <user> <cr>";
+var helpchkuser = "Ellenőrzi, hogy létezik-e egy adott felhasználó. Syntax: !checkuser <user>";
+var helpsaveusers = "Menti a ```users.json``` fájlt. Syntax: !saveusers";
+
+var userNotExistsLang =  'A felhasználó nem létezik';
+var userExistsembedLang = "A felhasználó létezik.";
+var userAddedEmbedLang = "Felhasználó hozzáadva.";
+var userRemovedEmbedLang = "Felhasználó eltávolítva.";
+var userAndCrNotEnteredEmbedLang = 'Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!';
+var enterUsernameEmbedLang = 'Kérlek addj meg egy felhasználó nevet!';
+var userAlreadyExistsEmbedLang = 'A felhasználó már létezik.';
+var crSetEmbedLang = 'Községi Krajcár Beállítva.';
+var crNotEnteredEmbedLang = 'Nem érvényes Községi Krajcár mennyiség!';
+var crAddedEmbedLang = 'Községi Krajcár hozzáadva.';
+var crRemovedEmbedLang = "Községi Krajcár eltávolítva.";
+var enterNumberEmbedLang = 'Kérlek addj meg egy számot!';
+var numberNotEnteredLang = 'Nem érvényes szám!';
+var purgeEmbedLang = 'Törlés sikeres!.';
+var saveUsersFailedLang = 'A felhasználók mentése sikertelen!';
+var saveUsersLang = 'A felhasználók mentése sikeres!';
+var leaderboardsFailedLang = 'A ranglista lekérése sikertelen!';
+var leaderboardsSuccesLang = 'A ranglista lekérése sikeres!';
+var userAndFlagNotEnteredLang = 'Kérlek add meg a felhasználó nevet és a flaget!';
+var flagAlreadyExistsLang = 'A flag már létezik.';;
 
 const { MessageEmbed } = require('discord.js');
 //update helpEmbed with the new commands
 const helpenbed = new MessageEmbed()
     .setColor('#00ffc8')
-    .setTitle('Help')
-    .setDescription('List of all commands, and syntax.')
-    .addField('!adduser', 'Létrehoz egy új felhasználót. Systax: !adduser <username> <cr>')
-    .addField('!rmuser', 'Törli a megadott felhasználót. Systax: !rmuser <username>')
-    .addField('!help', 'Megjeleneníti ezt a lapot. Syntax: !help')
-    .addField('!addcr', 'Adott mennyiségű Községi Krajcárt ad egy adott felhasználóhoz. Syntax: !addcr <user> <cr>')
-    .addField('!rmcr', 'Adott mennyiségű Községi Krajcárt távolít el egy adott felhasználótól. Syntax: !rmcr <user> <cr>')
-    .addField('!getcr', 'Megjeleníti egy adott felhasnáló Községi Krajcár egyenlegét. Syntax: !getcr <user>')
-    .addField('!crlist', 'Megjeleníti a ```users.json``` fájlt. Syntax: !crlist')
-    .addField('!setcr', 'Beállít egy adott mennyiségű Községi Krajcárt egy adott felhasználónak. Syntax: !crset <user> <cr>')
-    .addField('!checkuser', 'Ellenőrzi, hogy létezik-e egy adott felhasználó. Syntax: !checkuser <user>')
-    .addField('!saveusers', 'Menti a ```users.json``` fájlt. Syntax: !saveusers')
+    .setTitle(helpTitle)
+    .setDescription(helpDescription)
+    .addField('!adduser', helpAdduser)
+    .addField('!rmuser', helprmuser)
+    .addField('!help', helpHelp)
+    .addField('!addcr', helpaddcr)
+    .addField('!rmcr', helprmcr)
+    .addField('!getcr', helpgetcr)
+    .addField('!crlist', helpcrlist)
+    .addField('!setcr', helpsetcr)
+    .addField('!checkuser', helpchkuser)
+    .addField('!saveusers', helpsaveusers);
 
-const userNotExists = generateEmbed('A felhasználó nem létezik.', true);
-const userExistsembed = generateEmbed("A felhasználó létezik.", false);
-const userAddedEmbed = generateEmbed("Felhasználó hozzáadva.", false);
-const userRemovedEmbed = generateEmbed("Felhasználó eltávolítva.", false);
-const userAndCrNotEnteredEmbed = generateEmbed('Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!', true);
-const enterUsernameEmbed = generateEmbed('Kérlek addj meg egy felhasználó nevet!', true);
-const userAlreadyExistsEmbed = generateEmbed('A felhasználó már létezik.', true);
-const crSetEmbed = generateEmbed('Községi Krajcár Beállítva.', false);
-const crNotEnteredEmbed = generateEmbed('Nem érvényes Községi Krajcár mennyiség!', true);
+const userNotExists = generateEmbed(userNotExistsLang, true);
+const userExistsembed = generateEmbed(userExistsembedLang, false);
+const userAddedEmbed = generateEmbed(userAddedEmbedLang, false);
+const userRemovedEmbed = generateEmbed(userRemovedEmbedLang, false);
+const userAndCrNotEnteredEmbed = generateEmbed(userAndCrNotEnteredEmbedLang, true);
+const enterUsernameEmbed = generateEmbed(enterUsernameEmbedLang, true);
+const userAlreadyExistsEmbed = generateEmbed(userAlreadyExistsEmbedLang, true);
+const crSetEmbed = generateEmbed(crSetEmbedLang, false);
+const crNotEnteredEmbed = generateEmbed(crNotEnteredEmbedLang, true);
 const crAddedEmbed = generateEmbed('Községi Krajcár hozzáadva.', false);
 const crRemovedEmbed = generateEmbed("Községi Krajcár eltávolítva.", false);
 const enterNumberEmbed = generateEmbed('Kérlek addj meg egy számot!', true);
@@ -46,6 +81,7 @@ const saveUsers = generateEmbed('A felhasználók mentése sikeres!', false);
 const leaderboardsFailed = generateEmbed('A ranglista lekérése sikertelen!', true);
 const leaderboardsSucces = generateEmbed('A ranglista lekérése sikeres!', false);
 const userAndFlagNotEnteredEmbed = generateEmbed('Kérlek add meg a felhasználó nevet és a flaget!', true);
+const flagAlreadyExists = generateEmbed('A flag már létezik.', true);
 
 function generateEmbed(_text, _error){
     if(_error){
@@ -263,7 +299,10 @@ client.on('message', message => {
             var flag = args[1];
             result_ = indexFile.addFlag(user, flag);
 
-            if(!result_) 
+            if(result_ === 2){
+                message.channel.send({ embeds: [flagAlreadyExists] });
+            }
+            if(!result_ && result_ != 2)
             {
                 message.channel.send({ embeds: [userNotExists] });
             }
@@ -271,18 +310,6 @@ client.on('message', message => {
             {
                 message.channel.send("Flag hozzáadva!\n" + result_);
                 //TODO:check if role arleady exists
-                var role = message.author.guild.roles.cache.find("name", result_);
-                if(role!= null) return;
-                message.guild.createRole({
-                    name: result_, 
-                    color: '#00ff00',
-                    permissions: []
-                }).then(function(role) {
-                    message.guild.members.forEach(function(member) {
-                        if(member.roles.has(role.id) && member.id === users[args[1]].discordid) return;
-                        member.addRole(role);
-                    });
-                });
             }
         }
     }

@@ -192,6 +192,7 @@ function addFlag(user, _flag)
     usersRaw = fs.readFileSync('./users.json');
     users = JSON.parse(usersRaw);
     if (!checkUser(user)) { return false; }
+    if(!checkFlag(_flag)) { return 2; }
     else
     {
         var i = 0;
