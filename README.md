@@ -15,7 +15,7 @@ Docs soon
 * TODO: if 1. arg is '_' then use last user
 * TODO: Checkmate everyone
 
-## Arthours
+## Authors
 👤 **AdyEndre (AdyStudios)**
 * Website: currently down :(
 * Github: [@AdyStudios](https://github.com/AdyStudios)
