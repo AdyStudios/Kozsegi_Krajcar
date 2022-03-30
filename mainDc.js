@@ -8,42 +8,42 @@ var prefix = "!";
 let token = process.env.token || fs.readFileSync('./token.token', 'utf8');
 //let token = fs.readFileSync('./token.token', 'utf8');
 client.commands = new Discord.Collection();
+var lang = require('./lang/en.json')
 
 //Language variables
-//Hungarian variables
-var helpTitle = "Segítség";
-var helpDescription = "A parancsok listája.";
-var helpAdduser = "Létrehoz egy új felhasználót. Systax: !adduser <username> <cr>";
-var helprmuser = "Törli a megadott felhasználót. Systax: !rmuser <username>";
-var helpHelp = "Megjeleneníti ezt a lapot. Syntax: !help";
-var helpaddcr = "Adott mennyiségű Községi Krajcárt ad egy adott felhasználóhoz. Syntax: !addcr <user> <cr>";
-var helprmcr = "Törli a megadott felhasználót. Systax: !rmuser <username>";
-var helpgetcr = "Megjeleníti egy adott felhasnáló Községi Krajcár egyenlegét. Syntax: !getcr <user>";
-var helpcrlist = "Megjeleníti a ```users.json``` fájlt. Syntax: !crlist";
-var helpsetcr = "Beállít egy adott mennyiségű Községi Krajcárt egy adott felhasználónak. Syntax: !crset <user> <cr>";
-var helpchkuser = "Ellenőrzi, hogy létezik-e egy adott felhasználó. Syntax: !checkuser <user>";
-var helpsaveusers = "Menti a ```users.json``` fájlt. Syntax: !saveusers";
+var helpTitle = lang.helpTitle;
+var helpDescription = lang.helpDescription;
+var helpAdduser = lang.helpAdduser;
+var helprmuser = lang.helprmuser;
+var helpHelp = lang.helpHelp;
+var helpaddcr = lang.helpaddcr;
+var helprmcr = lang.helprmcr;
+var helpgetcr = lang.helpgetcr;
+var helpcrlist = lang.helpcrlist;
+var helpsetcr = lang.helpsetcr;
+var helpchkuser = lang.helpchkuser;
+var helpsaveusers = lang.helpsaveusers;
 
-var userNotExistsLang =  'A felhasználó nem létezik';
-var userExistsembedLang = "A felhasználó létezik.";
-var userAddedEmbedLang = "Felhasználó hozzáadva.";
-var userRemovedEmbedLang = "Felhasználó eltávolítva.";
-var userAndCrNotEnteredEmbedLang = 'Kérlek add meg a felhasználó nevet és Községi Krajcár mennyiséget!';
-var enterUsernameEmbedLang = 'Kérlek addj meg egy felhasználó nevet!';
-var userAlreadyExistsEmbedLang = 'A felhasználó már létezik.';
-var crSetEmbedLang = 'Községi Krajcár Beállítva.';
-var crNotEnteredEmbedLang = 'Nem érvényes Községi Krajcár mennyiség!';
-var crAddedEmbedLang = 'Községi Krajcár hozzáadva.';
-var crRemovedEmbedLang = "Községi Krajcár eltávolítva.";
-var enterNumberEmbedLang = 'Kérlek addj meg egy számot!';
-var numberNotEnteredLang = 'Nem érvényes szám!';
-var purgeEmbedLang = 'Törlés sikeres!.';
-var saveUsersFailedLang = 'A felhasználók mentése sikertelen!';
-var saveUsersLang = 'A felhasználók mentése sikeres!';
-var leaderboardsFailedLang = 'A ranglista lekérése sikertelen!';
-var leaderboardsSuccesLang = 'A ranglista lekérése sikeres!';
-var userAndFlagNotEnteredLang = 'Kérlek add meg a felhasználó nevet és a flaget!';
-var flagAlreadyExistsLang = 'A flag már létezik.';;
+var userNotExistsLang =  lang.userNotExistsLang;
+var userExistsembedLang = lang.userExistsembedLang;
+var userAddedEmbedLang = lang.userAddedEmbedLang;
+var userRemovedEmbedLang = lang.userRemovedEmbedLang;
+var userAndCrNotEnteredEmbedLang = lang.userAndCrNotEnteredEmbedLang;
+var enterUsernameEmbedLang = lang.enterUsernameEmbedLang;
+var userAlreadyExistsEmbedLang = lang.userAlreadyExistsEmbedLang;
+var crSetEmbedLang = lang.crSetEmbedLang;
+var crNotEnteredEmbedLang = lang.crNotEnteredEmbedLang;
+var crAddedEmbedLang = lang.crAddedEmbedLang;
+var crRemovedEmbedLang = lang.crRemovedEmbedLang;
+var enterNumberEmbedLang = lang.enterNumberEmbedLang;
+var numberNotEnteredLang = lang.numberNotEnteredLang;
+var purgeEmbedLang = lang.purgeEmbedLang;
+var saveUsersFailedLang = lang.saveUsersFailedLang;
+var saveUsersLang = lang.saveUsersLang;
+var leaderboardsFailedLang = lang.leaderboardsFailedLang;
+var leaderboardsSuccesLang = lang.leaderboardsSuccesLang;
+var userAndFlagNotEnteredLang = lang.userAndFlagNotEnteredLang;
+var flagAlreadyExistsLang = lang.flagAlreadyExistsLang;
 
 const { MessageEmbed } = require('discord.js');
 //update helpEmbed with the new commands
@@ -71,17 +71,17 @@ const enterUsernameEmbed = generateEmbed(enterUsernameEmbedLang, true);
 const userAlreadyExistsEmbed = generateEmbed(userAlreadyExistsEmbedLang, true);
 const crSetEmbed = generateEmbed(crSetEmbedLang, false);
 const crNotEnteredEmbed = generateEmbed(crNotEnteredEmbedLang, true);
-const crAddedEmbed = generateEmbed('Községi Krajcár hozzáadva.', false);
-const crRemovedEmbed = generateEmbed("Községi Krajcár eltávolítva.", false);
-const enterNumberEmbed = generateEmbed('Kérlek addj meg egy számot!', true);
-const numberNotEntered = generateEmbed('Nem érvényes szám!', true);
-const purgeEmbed = generateEmbed('Törlés sikeres!.', false); 
-const saveUsersFailed = generateEmbed('A felhasználók mentése sikertelen!', true);
-const saveUsers = generateEmbed('A felhasználók mentése sikeres!', false);
-const leaderboardsFailed = generateEmbed('A ranglista lekérése sikertelen!', true);
-const leaderboardsSucces = generateEmbed('A ranglista lekérése sikeres!', false);
-const userAndFlagNotEnteredEmbed = generateEmbed('Kérlek add meg a felhasználó nevet és a flaget!', true);
-const flagAlreadyExists = generateEmbed('A flag már létezik.', true);
+const crAddedEmbed = generateEmbed(crAddedEmbedLang, false);
+const crRemovedEmbed = generateEmbed(crRemovedEmbedLang, false);
+const enterNumberEmbed = generateEmbed(enterNumberEmbedLang, true);
+const numberNotEntered = generateEmbed(numberNotEnteredLang, true);
+const purgeEmbed = generateEmbed(prugeEmbedLang, false); 
+const saveUsersFailed = generateEmbed(saveUsersFailedLang, true);
+const saveUsers = generateEmbed(saveUsersLang, false);
+const leaderboardsFailed = generateEmbed(leaderboardsFailedLang, true);
+const leaderboardsSucces = generateEmbed(leaderboardsSuccesLang, false);
+const userAndFlagNotEnteredEmbed = generateEmbed(userAndFlagNotEnteredEmbedLang, true);
+const flagAlreadyExists = generateEmbed(flagAlreadyExistsLang, true);
 
 function generateEmbed(_text, _error){
     if(_error){
@@ -203,7 +203,7 @@ client.on('message', message => {
                 message.channel.send({ embeds: [userNotExists] });
             }
             if(result_ || result_ === 0) {
-                message.channel.send({embeds: [generateTextEmbed(user + ' Községi Krajcár egyenlege: ' + result_, '', '#00ff00')]});
+                message.channel.send({embeds: [generateTextEmbed(user + lang.crWorth + result_, '', '#00ff00')]});
             }
         }
     }
@@ -308,7 +308,7 @@ client.on('message', message => {
             }
             if(result_ != false) 
             {
-                message.channel.send("Flag hozzáadva!\n" + result_);
+                message.channel.send(lang.flagAddedMsg + '\n' + result_);
                 //TODO:check if role arleady exists
             }
         }
