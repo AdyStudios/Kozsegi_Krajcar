@@ -80,7 +80,7 @@ const saveUsersFailed = generateEmbed(saveUsersFailedLang, true);
 const saveUsers = generateEmbed(saveUsersLang, false);
 const leaderboardsFailed = generateEmbed(leaderboardsFailedLang, true);
 const leaderboardsSucces = generateEmbed(leaderboardsSuccesLang, false);
-const userAndFlagNotEnteredEmbed = generateEmbed(userAndFlagNotEnteredEmbedLang, true);
+const userAndFlagNotEnteredEmbed = generateEmbed(userAndFlagNotEnteredLang, true);
 const flagAlreadyExists = generateEmbed(flagAlreadyExistsLang, true);
 
 function generateEmbed(_text, _error){
