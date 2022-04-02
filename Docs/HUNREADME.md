@@ -1,6 +1,6 @@
 ![Version](https://img.shields.io/badge/Version-0.8.0-blue.svg?cacheSeconds=2592000)
 ![stabile](https://img.shields.io/badge/stabile-green.svg?cacheSeconds=2592000)
-[![Documentation](https://img.shields.io/badge/Documentation-In_Progress-yellow.svg)](https://example.org)
+[![Documentation](https://img.shields.io/badge/Documentation-Passed-green.svg)](http://kozsegi-krajcar.freecluster.eu/wiki/index.php/Main_Page)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hema2-official/Kozsegi_Krajcar/blob/main/LICENSE)
 # Községi Krajcár
 Községi Krajcár Rendszer (open source) (originally by AdyEndre)
@@ -34,9 +34,4 @@ Docs soon
   Közreműködést támogatjuk, ha javaslatod, problémád, kérdésed, panaszod, bánatod, kínod, keservet, siralmad van nyugodtan írj, vagy jelents hibát (Issue-t) itt, githubon!
   Ha forkolod a a repo-t akkor kérlek említs meg minket 🙏 ;).
 # Használat
-  Az index.js kezeli az összes felhasználót, viszont csak függvényeket tartalmaz. A függvényeket mi egy Discord bot segítségével érjük el (mainDc.js), de lehetne hozzá egy külön   GUI-t csinálni.
-  A frontend-ért pedig a networkpost.js és a többi html fájl felelős. Az android applikáció csak egy webvierwer. A hostingot bárhol meg lehet oldani, mivel az url-t nem fogja     senki se látni (csak gépen), mi [heroku](https://www.heroku.com)-t használtuk.
-  Az oldal automatikusan újratölt, ha a fájl változik. Az index.js pedig minden művelet előtt frissíti a JSON-t.
-  A felhasználók a users.json fájl-ban vannak tárolva.
-
-HA TUDSZ DOCS OLDALT ÍRD MEG KÖSZ :)
+  A dokumentáció elérhető [itt](http://kozsegi-krajcar.freecluster.eu/wiki/index.php/Main_Page)
