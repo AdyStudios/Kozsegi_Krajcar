@@ -1,6 +1,6 @@
 ![Version](https://img.shields.io/badge/Version-0.8.0-blue.svg?cacheSeconds=2592000)
 ![stabile](https://img.shields.io/badge/stabile-green.svg?cacheSeconds=2592000)
-[![Documentation](https://img.shields.io/badge/Documentation-In_Progress-yellow.svg)](https://example.org)
+[![Documentation](https://img.shields.io/badge/Documentation-Passed-green.svg)](http://kozsegi-krajcar.freecluster.eu/wiki/index.php/Main_Page)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hema2-official/Kozsegi_Krajcar/blob/main/LICENSE)
 # Községi Krajcár [![HUN README](https://img.shields.io/badge/HUN-Readme-green.svg)](https://github.com/AdyStudios/Kozsegi_Krajcar/blob/main/Docs/HUNREADME.md)
 Községi Krajcár System (open source) (originally by AdyEndre)
@@ -37,4 +37,4 @@ Docs soon
 # 🤝 Contributors
   We support contribution, if you have a suggestion, problem, question or anyting, feel free to drop us a line or submit an issue, here on github. If you fork, you HAVE TO mention us ;)
 # Usage
-  DOCS COMING SOON! I promise!
+  See: [Documentation](http://kozsegi-krajcar.freecluster.eu/wiki/index.php/Main_Page)
