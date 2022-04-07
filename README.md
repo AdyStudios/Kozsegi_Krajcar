@@ -1,6 +1,6 @@
 ![Version](https://img.shields.io/badge/Version-0.8.0-blue.svg?cacheSeconds=2592000)
 ![stabile](https://img.shields.io/badge/stabile-green.svg?cacheSeconds=2592000)
-[![Documentation](https://img.shields.io/badge/Documentation-Passed-green.svg)](https://fcb3-81-182-76-207.ngrok.io/mediawiki/index.php/Main_Page)
+[![Documentation](https://img.shields.io/badge/Documentation-Passed-green.svg)](http://192.168.0.108/mediawiki/index.php/Main_Page)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hema2-official/Kozsegi_Krajcar/blob/main/LICENSE)
 # Községi Krajcár [![HUN README](https://img.shields.io/badge/HUN-Readme-green.svg)](https://github.com/AdyStudios/Kozsegi_Krajcar/blob/main/Docs/HUNREADME.md)
 Községi Krajcár System (open source) (originally by AdyEndre)
